@@ -1,4 +1,10 @@
 ﻿@{  
-    
+    ViewBag.Title = "MixItUp";
+    Layout = "~/Views/_Layout.cshtml";
 }
 <h1> Clock</h1>
+
+<div>
+    <button  type="button" onclick="document.getElementById('dateTime').innerHTML = Date()">Visa datum och tid</button>
+    <div id="dateTime"></div>
+</div>
