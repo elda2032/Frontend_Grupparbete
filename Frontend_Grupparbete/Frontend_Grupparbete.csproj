@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery.mixitup.js" />
     <Content Include="Struktur.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
