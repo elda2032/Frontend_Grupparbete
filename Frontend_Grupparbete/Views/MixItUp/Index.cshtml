@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Frontend_Grupparbete.Models.User>
+﻿@model Frontend_Grupparbete.Models.MixItUpViewModel
 @{
     ViewBag.Title = "MixItUp";
     Layout = "~/Views/_Layout.cshtml";
@@ -12,30 +12,53 @@
         display: inline-block;
         color: white;
         font-weight: bold;
-        background: #a0522d
+        background: #a0522d;
+        border: 2px solid black;
+        border-radius: 3px;
+        margin: 10px;
+        padding: 5px;
+        display: none;
+    }
+    .sort {
+        margin: 5px;
     }
 </style>
 
 
 <div class="container" id="Container">
     <h2>MixItUp</h2>
-    <div class="buttons">
+    <div id="buttons">
+        Sorting: 
         <div class="sort btn btn-default btn-xs" data-sort="default">Default</div>
-        <div class="sort btn btn-default btn-xs" data-sort="myorder:asc">Ascending</div>
-        <div class="sort btn btn-default btn-xs" data-sort="myorder:desc">Descending</div>
-        <div class="sort btn btn-default btn-xs" data-sort="random">Random</div> 
+        <div class="sort btn btn-default btn-xs" data-sort="random">Random</div><br/>
+        Sort by Salary:
+        <div class="sort btn btn-default btn-xs" data-sort="salary:asc">Ascending : Salary</div>
+        <div class="sort btn btn-default btn-xs" data-sort="salary:desc">Descending : Salary</div><br/>
+        Filtering:
+        <div class="filter btn btn-default btn-xs" data-filter="all">All</div>
+        <div class="filter btn btn-default btn-xs" data-filter="none">None</div><br/>
+        Filter by Profession: 
+        @foreach (var p in Model.Professions)
+        {
+            <div class="filter btn btn-default btn-xs" data-filter=".@p.Split(' ')[0]">@p</div>
+        }
+
+
+
     </div>
 
-    <div></div>
-    @foreach (var p in Model)
-    {
-        <div class="mix">
-            @p.FirstName @p.LastName<br/>
-            Email: @p.Email<br/>
-            Profession : @p.Profession<br/>
-            Salary: @p.Income
-        </div>
-    }
+    <div id="items">
+        @foreach (var p in Model.Users)
+        {
+            <div class="mix @p.Profession" data-salary="@p.Income">
+                @p.FirstName @p.LastName<br />
+                Email: @p.Email<br />
+                Profession : @p.Profession<br />
+                Salary: @p.Income
+            </div>
+        }
+    </div>
+
 </div>
 
 

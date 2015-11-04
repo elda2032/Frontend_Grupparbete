@@ -20,5 +20,6 @@ namespace Frontend_Grupparbete.Models
         public string Profession { get; set; }
 
         public int Income { get; set; }
+
     }
 }
