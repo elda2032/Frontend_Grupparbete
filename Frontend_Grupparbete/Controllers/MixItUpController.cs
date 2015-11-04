@@ -7,12 +7,13 @@ namespace Frontend_Grupparbete.Controllers
 {
     using System.Web.Mvc;
 
-    public class MixItUpController : Controller
+    using Frontend_Grupparbete.Models;
+
+    public class MixItUpController : DatabaseController
     {
         public ActionResult Index()
         {
-            return View();
-
+            return View(new MixItUpViewModel(Database.Users));
         }
     }
 }

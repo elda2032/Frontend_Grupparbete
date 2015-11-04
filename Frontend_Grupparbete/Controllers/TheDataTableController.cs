@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace Frontend_Grupparbete.Controllers
 {
-    public class ClockController : Controller
+    public class TheDataTableController : Controller
     {
+        // GET: DataTable get.rekt();
         public ActionResult Index()
         {
             return View();
-    
         }
     }
 }
