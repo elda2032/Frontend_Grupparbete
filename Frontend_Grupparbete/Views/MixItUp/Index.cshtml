@@ -1,9 +1,52 @@
-﻿@{
+﻿@model IEnumerable<Frontend_Grupparbete.Models.User>
+@{
     ViewBag.Title = "MixItUp";
     Layout = "~/Views/_Layout.cshtml";
 }
+<div>
 
-<h2>MixItUp</h2>
+</div>
+
+<style>
+    .mix {
+        display: inline-block;
+        color: white;
+        font-weight: bold;
+        background: #a0522d
+    }
+</style>
+
+
+<div class="container" id="Container">
+    <h2>MixItUp</h2>
+    <div class="buttons">
+        <div class="sort btn btn-default btn-xs" data-sort="default">Default</div>
+        <div class="sort btn btn-default btn-xs" data-sort="myorder:asc">Ascending</div>
+        <div class="sort btn btn-default btn-xs" data-sort="myorder:desc">Descending</div>
+        <div class="sort btn btn-default btn-xs" data-sort="random">Random</div> 
+    </div>
+
+    <div></div>
+    @foreach (var p in Model)
+    {
+        <div class="mix">
+            @p.FirstName @p.LastName<br/>
+            Email: @p.Email<br/>
+            Profession : @p.Profession<br/>
+            Salary: @p.Income
+        </div>
+    }
+</div>
+
 
 
 <script src="~/Scripts/jquery.mixitup.js"></script>
+<script>
+    $(function () {
+
+        // Instantiate MixItUp:
+
+        $('#Container').mixItUp();
+
+    });
+</script>

@@ -8,7 +8,6 @@ namespace Frontend_Grupparbete.Controllers
 {
     public class ClockController : Controller
     {
-
         public ActionResult Index()
         {
             return View();
