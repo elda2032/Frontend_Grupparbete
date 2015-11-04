@@ -1,7 +1,6 @@
 ﻿@model Frontend_Grupparbete.Models.MixItUpViewModel
 @{
     ViewBag.Title = "MixItUp";
-    Layout = "~/Views/_Layout.cshtml";
 }
 <div>
 
@@ -10,51 +9,79 @@
 <style>
     .mix {
         display: inline-block;
-        color: white;
-        font-weight: bold;
+        /*color: white;
+
         background: #a0522d;
-        border: 2px solid black;
+        border: 2px solid black;*/
         border-radius: 3px;
         margin: 10px;
         padding: 5px;
         display: none;
     }
+
     .sort {
-        margin: 5px;
+        margin: 5px 0 5px 0;
     }
 </style>
 
 
-<div class="container" id="Container">
-    <h2>MixItUp</h2>
-    <div id="buttons">
-        Sorting: 
-        <div class="sort btn btn-default btn-xs" data-sort="default">Default</div>
-        <div class="sort btn btn-default btn-xs" data-sort="random">Random</div><br/>
-        Sort by Salary:
-        <div class="sort btn btn-default btn-xs" data-sort="salary:asc">Ascending : Salary</div>
-        <div class="sort btn btn-default btn-xs" data-sort="salary:desc">Descending : Salary</div><br/>
-        Filtering:
-        <div class="filter btn btn-default btn-xs" data-filter="all">All</div>
-        <div class="filter btn btn-default btn-xs" data-filter="none">None</div><br/>
-        Filter by Profession: 
-        @foreach (var p in Model.Professions)
-        {
-            <div class="filter btn btn-default btn-xs" data-filter=".@p.Split(' ')[0]">@p</div>
-        }
+<div id="Container">
+    <h2>User Database with MixItUp!</h2>
+    <p>
+        Here you can play around with all the users.<br />
+        Have Fun!
+    </p>
+    <h3>Settings</h3>
+    <div id="buttons" class="col-md-12 alert-info alert">
+        <div id="sorting">
 
+            <div class="col-md-4">
+                <b>Sorting: </b>
+            </div>
+            <div class="col-md-8">
+                <div class="sort btn btn-warning btn-xs" data-sort="default">Default</div>
+                <div class="sort btn btn-warning btn-xs" data-sort="random">Random</div>
+            </div>
 
+            <div class="col-md-4">
+                <b>Sort By:</b>
+            </div>
+            <div class="col-md-8">
+                <Select id="SortSelect">
+                    <option value="name">First Name</option>
+                    <option value="lastname">Last Name</option>
+                    <option value="email">Email</option>
+                    <option value="salary">Income</option>
+                    <option value="Profession">First Name</option>
+                </Select>
+                <select id="SortDirection">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="filtering">
+            <div class="col-md-4">
+                <b>Filter by Profession</b>
+            </div>
+            <div class="col-md-8">
+                @Html.DropDownList("Profession", Model.Professions, new { Id = "FilterList" })
+            </div>
+            
+
+        </div>
 
     </div>
-
-    <div id="items">
+    <h3>Users</h3>
+    <div id="items" class="col-md-12 alert alert-info">
         @foreach (var p in Model.Users)
         {
-            <div class="mix @p.Profession" data-salary="@p.Income">
-                @p.FirstName @p.LastName<br />
-                Email: @p.Email<br />
-                Profession : @p.Profession<br />
-                Salary: @p.Income
+            <div class="mix @p.Profession btn-danger" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
+                <b>Name:</b> @p.FirstName @p.LastName<br />
+                <b>Email:</b> @p.Email<br />
+                <b>Profession:</b> @p.Profession<br />
+                <b>Income:</b> @p.Income
             </div>
         }
     </div>
@@ -66,10 +93,28 @@
 <script src="~/Scripts/jquery.mixitup.js"></script>
 <script>
     $(function () {
-
-        // Instantiate MixItUp:
-
         $('#Container').mixItUp();
-
+        $('#FilterList').change(function () {
+            filter($('option:selected', this).val());
+        });
+        $('#SortSelect').change(function() {
+            sort();
+        });
+        $('#SortDirection').change(function () {
+            sort();
+        });
     });
+
+    function sort() {
+        var st = $('#SortSelect:selected').val() + ':' + $('#SortDirection:selected').val();
+        alert(st);
+        $('#Container').mixItUp('sort',st );
+    }
+
+    function filter(profession) {
+        if (profession === "All")
+            $('#Container').mixItUp('filter', 'all');
+        else
+            $('#Container').mixItUp('filter', '.'+profession);
+    }
 </script>
