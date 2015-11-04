@@ -7,6 +7,6 @@ namespace Frontend_Grupparbete.Controllers
 {
     public class ClockController
     {
-        // Fredrik was here!
+        
     }
 }
