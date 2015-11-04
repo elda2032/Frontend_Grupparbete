@@ -1,0 +1,11 @@
+﻿Struktur:
+	• MVC.
+	• SQL Databas. (användare + MixitUp data)
+	• Boottsrap.
+	• En Controller för varje sida.
+	• En Layoutsida med toppmeny.
+	• En inlogningssida i Angular.
+	• Väder : Elin.
+	• Klocka: Lena.
+	• DataTable : Fredrik.
+	• MixitUp : Stefan.
