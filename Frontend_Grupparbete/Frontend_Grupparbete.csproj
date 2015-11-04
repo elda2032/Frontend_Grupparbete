@@ -160,7 +160,6 @@
     <Content Include="Views\TheDataTable\OldIndex.cshtml" />
     <Content Include="Views\TheDataTable\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\Weather\_Daily.cshtml" />
     <Content Include="Font\weathericons-regular-webfont.eot" />
     <Content Include="Font\weathericons-regular-webfont.ttf" />
