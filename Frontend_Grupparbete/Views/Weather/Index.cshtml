@@ -1,7 +1,125 @@
 ﻿
 
 @{
-    
+    Layout = "../_Layout.cshtml";
+    ViewBag.Title = "Weather";
 }
 
-<h2>Weather</h2>
+<h2>Weather <a href="#" id="update-api">Update api</a></h2>
+<br/>
+<span class="label label-default">Timezone: </span><span id="timezone"></span>
+<hr/>
+
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation"><a href="#now" aria-controls="now" role="tab" data-toggle="tab">Now</a></li>
+        <li role="presentation" class="active"><a href="#daily" aria-controls="daily" role="tab" data-toggle="tab">Daily</a></li>
+        <li role="presentation"><a href="#hourly" aria-controls="hourly" role="tab" data-toggle="tab">Hourly</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane" id="now">now</div>
+        <div role="tabpanel" class="tab-pane active" id="daily">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-3"><div id="daily-0"></div></div>
+                    <div class="col-md-3"><div id="daily-1"></div></div>
+                    <div class="col-md-3"><div id="daily-2"></div></div>
+                    <div class="col-md-3"><div id="daily-3"></div></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-3"><div id="daily-4"></div></div>
+                    <div class="col-md-3"><div id="daily-5"></div></div>
+                    <div class="col-md-3"><div id="daily-6"></div></div>
+                    <div class="col-md-3"><div id="daily-7"></div></div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="hourly">hourly</div>
+    </div>
+
+</div>
+
+<script>
+    $(function() {
+
+        var latitude = '59.329323';
+        var longitude = '18.068581';
+
+        $('#update-api').click(function() {
+            $.ajax({
+                url: 'https://api.forecast.io/forecast/44c7cdd00e0f82699006ed275eb2b6cf/' + latitude + ',' + longitude + '?units=si',
+                type: 'GET',
+                dataType: 'jsonp',
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                    updateWeather(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+        });
+        
+
+    });
+
+    function updateWeather(json) {
+
+        var currently = json.currently;
+        var daily = json.daily;
+        var hourly = json.hourly;
+        var timezone = json.timezone;
+
+        $('#timezone').text(timezone);
+
+        // CURRENTLY
+
+        // DAILY
+        $.each(daily.data, function (i, item) {
+
+            var json = {
+                time: item.time,
+                summary: item.summary,
+                icon: item.icon,
+                temperatureMax: item.temperatureMax,
+                temperatureMaxTime: item.temperatureMaxTime,
+                temperatureMin: item.temperatureMin,
+                temperatureMinTime: item.temperatureMinTime,
+                cloudCover: item.cloudCover,
+                precipIntensity: item.precipIntensity,
+                precipIntensityMax: item.precipIntensityMax,
+                precipProbability: item.precipProbability,
+                windSpeed: item.windSpeed,
+                windBearing: item.windBearing,
+                sunriseTime: item.sunriseTime,
+                sunsetTime: item.sunsetTime,
+                moonPhase: item.moonPhase
+            };
+            $.ajax({
+                url: '@Url.Action("Daily", "Weather")',
+                type: 'get',
+                data: json,
+                datatype: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $('#daily-' + i).replaceWith(data);
+                },
+                error: function (request, status, err) {
+                    //alert(status);
+                    //alert(err);
+                }
+            });
+        });
+        
+
+        // HOURLY
+
+
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+</script>

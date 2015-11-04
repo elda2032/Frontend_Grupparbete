@@ -81,6 +81,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Font\weathericons-regular-webfont.svg" />
+    <Content Include="Content\weather-icons-wind.css" />
+    <Content Include="Content\weather-icons-wind.min.css" />
+    <Content Include="Content\weather-icons.css" />
+    <Content Include="Content\weather-icons.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Struktur.txt" />
     <Content Include="Web.config" />
@@ -92,6 +97,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Weather\DailyWeather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +105,11 @@
     <Content Include="packages.config" />
     <Content Include="Views\Weather\Index.cshtml" />
     <Content Include="Views\_Layout.cshtml" />
+    <Content Include="Views\Weather\_Daily.cshtml" />
+    <Content Include="Font\weathericons-regular-webfont.eot" />
+    <Content Include="Font\weathericons-regular-webfont.ttf" />
+    <Content Include="Font\weathericons-regular-webfont.woff" />
+    <Content Include="Font\weathericons-regular-webfont.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -108,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
