@@ -9,5 +9,10 @@ namespace Frontend_Grupparbete.Controllers
 
     public class MixItUpController : Controller
     {
+        public ActionResult Index()
+        {
+            return View();
+
+        }
     }
 }
