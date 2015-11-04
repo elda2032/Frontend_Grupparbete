@@ -16,6 +16,13 @@
 
 </head>
 <body>
+  
+    <ul id="menu">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Login", "Index", "Login")</li>
+        <li>@Html.ActionLink("Weather", "Index", "Weather")</li>
+        <li>@Html.ActionLink("Clock", "Index", "Clock")</li>
+    </ul> 
     @RenderBody()
 </body>
 </html>
