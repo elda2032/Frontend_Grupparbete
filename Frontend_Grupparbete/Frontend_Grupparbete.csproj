@@ -48,6 +48,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.JQuery.DataTables, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc.JQuery.DataTables.1.3.26\lib\net45\Mvc.JQuery.DataTables.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mvc.JQuery.Datatables.Core, Version=1.0.5717.23144, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc.JQuery.Datatables.Core.1.3.14\lib\net45\Mvc.JQuery.Datatables.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -123,6 +135,7 @@
     <Compile Include="Models\MixItUpViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterDatatablesModelBinder.cs" />
     <Compile Include="UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,11 +147,11 @@
     <Content Include="Views\MixItUp\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\TheDataTable\OldIndex.cshtml" />
     <Content Include="Views\TheDataTable\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,42 +1,59 @@
-﻿@{
+﻿@model IEnumerable<Frontend_Grupparbete.Models.User>
+
+@{
     ViewBag.Title = "Index";
 }
 <link href="~/DataTableInsanity/myDataTableCssFile.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="~/DataTableInsanity/DataTableMain.js"></script>
+<h2>Welcome to the DataTable page</h2>
 
-<h2>Welcome to the awesome DataTable page!</h2>
+<table id="mainTable"class="display">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Income)
+        </th>
+        <th></th>
+    </tr>
 
-<div style="margin: 100px 40px">
-
-    <table id="mainTable" class="display">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Extn.</th>
-            <th>Start date</th>
-            <th>Salary</th>
-        </tr>
-        </thead>
-        <tfoot>
-        <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Extn.</th>
-            <th>Start date</th>
-            <th>Salary</th>
-        </tr>
-        </tfoot>
-    </table>
-</div>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Income)
+        </td>
+    </tr>
+}
+</table>
 <script>
-    $('#mainTable').dataTable({
-        ajax: "/DataTableInsanity/data.txt",
-        paging: true,
-        ordering: true,
-        responsive: true
-    });
+    $('#mainTable').dataTable();
 </script>
