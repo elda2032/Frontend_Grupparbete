@@ -8,6 +8,14 @@
       "2015/02/01",
       "$1,210,000"
     ],
+	[
+	  "Fredrik Sandstrom",
+      "Front End Madness",
+      "Stockholm",
+      "4951",
+      "2015/08/01",
+      "$123,000"
+	],
     [
       "Tiger Nixon",
       "System Architect",
