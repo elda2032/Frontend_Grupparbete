@@ -1,0 +1,46 @@
+﻿@model Frontend_Grupparbete.Models.Weather.HourlyWeather
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="row" style="margin-top: 0;">
+            <div class="col-md-7">
+                <h3>@Model.Time.ToString("t")</h3>
+            </div>
+            <div class="col-md-5">
+                <div class="hourly-2xfont" data-toggle="tooltip" data-placement="left" title="@Model.Summary"><span class="wi @Model.Icon weathericon-hourly"></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div><span class="wi wi-thermometer"></span> (actual) <span>@Model.Temperature &deg;C</span></div>
+
+        <div><span class="wi wi-thermometer"></span> (app) <span>@Model.ApparentTemperature &deg;C</span></div>
+
+    </div>
+    <div class="col-md-2">
+        <div class="hourly-2xfont" data-toggle="tooltip" data-placement="left" title="Cloud cover"><span class="wi wi-cloudy"></span> <span>@String.Format("{0:P0}", Model.CloudCover)</span></div>
+    </div>
+    <div class="col-md-2">
+
+        @{
+            var precipIcon = Model.Temperature >= 0 ? "wi-raindrops" : "wi-snowflake-cold";
+            var precipTooltip = Model.Temperature >= 0 ? "Rain" : "Snow";
+        }
+        <div data-toggle="tooltip" data-placement="left" title="@precipTooltip" style="line-height: 2em;">
+            <span class="wi @precipIcon hourly-2xfont" style="display: inline-flex; vertical-align: middle;"></span>&nbsp;
+            <span style="display: inline-flex;vertical-align: middle;">@Model.PrecipIntensity mm/h (@String.Format("{0:P0}", Model.PrecipProbability))</span>
+        </div>
+
+    </div>
+    <div class="col-md-3">
+        <div data-toggle="tooltip" data-placement="left" title="Wind" style="line-height: 2em;">
+            <span class="wi wi-strong-wind hourly-2xfont" style="display: inline-flex; vertical-align: middle;"></span>&nbsp;
+            <span style="display: inline-flex;vertical-align: middle;">@Model.WindSpeed m/s </span>&nbsp;
+            <span class="wi @Model.WindBearingIcon hourly-2xfont" style="display: inline-flex; vertical-align: middle;"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <hr />
+</div>
