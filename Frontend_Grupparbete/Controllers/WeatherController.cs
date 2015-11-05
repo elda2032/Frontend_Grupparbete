@@ -118,8 +118,7 @@ namespace Frontend_Grupparbete.Controllers
                 WindBearingIcon = GetWindBearingIcon(windBearing),
                 SunriseTime = ToDateTime(sunriseTime),
                 SunsetTime = ToDateTime(sunsetTime),
-                MoonIcon = GetMoonIcon(moonPhase),
-                MoonPhase = moonPhase
+                MoonIcon = GetMoonIcon(moonPhase)
             };
             return PartialView("_Daily", model);
         }
@@ -143,6 +142,27 @@ namespace Frontend_Grupparbete.Controllers
                 WindBearingIcon = GetWindBearingIcon(windBearing)
             };
             return PartialView("_Hourly", model);
+        }
+
+        public ActionResult Currently(string time, string summary, string icon,
+            decimal temperature, decimal apparentTemperature,
+            decimal cloudCover, decimal precipIntensity, decimal precipProbability,
+            decimal windSpeed, decimal windBearing)
+        {
+            var model = new CurrentlyWeather
+            {
+                Time = ToDateTime(time),
+                Summary = summary,
+                Icon = GetWeatherIcon(icon),
+                Temperature = temperature,
+                ApparentTemperature = apparentTemperature,
+                CloudCover = cloudCover,
+                PrecipIntensity = precipIntensity,
+                PrecipProbability = precipProbability,
+                WindSpeed = windSpeed,
+                WindBearingIcon = GetWindBearingIcon(windBearing)
+            };
+            return PartialView("_Currently", model);
         }
     }
 }

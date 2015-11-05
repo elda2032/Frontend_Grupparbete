@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Weather";
 }
 
@@ -50,13 +48,22 @@
         .tab-content div {
             text-align: center;
         }
+        .col-split {
+            padding-right: 0;
+            padding-left: 0;
+        }
     }
 </style>
 
-<h2>Weather <a href="#" id="update-api">Update api</a></h2>
-<br/>
-<span class="label label-default">Timezone: </span><span id="timezone"></span>
-<hr/>
+<h2>                                                                                                            
+    Weather
+    <input type="text" class="form-control" id="search-location" style="display: inline-block;" />
+    <input type="button" class="btn btn-default" id="search" value="Search" />
+</h2>
+<br />
+<div><span class="h3">Location</span> <span id="location"></span></div>
+<div><span class="h4">Timezone: </span><span id="timezone"></span></div>
+<hr />
 
 <div>
 
@@ -73,16 +80,16 @@
         <div role="tabpanel" class="tab-pane active" id="daily">
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6 col-split">
-                    <div class="col-md-3 daily-div"><div id="daily-0"></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-1"></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-2"></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-3"></div></div>
+                    <div class="col-md-3"><div id="daily-0"></div></div>
+                    <div class="col-md-3"><div id="daily-1"></div></div>
+                    <div class="col-md-3"><div id="daily-2"></div></div>
+                    <div class="col-md-3"><div id="daily-3"></div></div>
                 </div>
                 <div class="col-md-6 col-split">
-                    <div class="col-md-3 daily-div"><div id="daily-4"></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-5"></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-6"></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-7"></div></div>
+                    <div class="col-md-3"><div id="daily-4"></div></div>
+                    <div class="col-md-3"><div id="daily-5"></div></div>
+                    <div class="col-md-3"><div id="daily-6"></div></div>
+                    <div class="col-md-3"><div id="daily-7"></div></div>
                 </div>
             </div>
         </div>
@@ -93,46 +100,63 @@
 
 </div>
 
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js"></script>
+
 <script>
     $(function () {
+        
+        $('#search').click(function () {
 
-        var latitude = '59.329323';
-        var longitude = '18.068581';
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': $('#search-location').val() }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    console.log("Latitude: " + results[0].geometry.location.lat());
+                    console.log("Longitude: " + results[0].geometry.location.lng());
+                    console.log(results);
 
-        $('#update-api').click(function () {
-            $.ajax({
-                url: 'https://api.forecast.io/forecast/44c7cdd00e0f82699006ed275eb2b6cf/' + latitude + ',' + longitude + '?units=si',
-                type: 'GET',
-                dataType: 'jsonp',
-                success: function (data, textStatus, xhr) {
-                    console.log(data);
-                    updateWeather(data);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log('Error in Operation');
-                },
-                complete: function () {
-                    $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
-                    setTooltipPositions();
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+
+                    $.ajax({
+                        url: 'https://api.forecast.io/forecast/44c7cdd00e0f82699006ed275eb2b6cf/' + latitude + ',' + longitude + '?units=si',
+                        type: 'GET',
+                        dataType: 'jsonp',
+                        success: function (data, textStatus, xhr) {
+                            console.log(data);
+                            updateWeather(data);
+                            $('#location').html($('#search-location').val());
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log('Error in Operation');
+                        },
+                        complete: function () {
+                            $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+                            setTooltipPositions();
+                        }
+                    });
+                    
+                } else {
+                    alert('Invalid address: ' + $('#search-location').val());
                 }
             });
         });
 
         $(window).resize(function () {
-            setTooltipPositions();   
+            setTooltipPositions();
         });
-        
+
     });
 
     function setTooltipPositions() {
         if ($(window).width() < 768) {
-            $.each($('[data-toggle="tooltip"]'), function() {
-                $(this).data('placement', 'bottom');
+            $.each($('[data-toggle="tooltip"]'), function () {
+                $(this).attr('data-placement', 'bottom');
             });
         } else {
             $.each($('[data-toggle="tooltip"]'), function () {
                 if (!$(this).hasClass('tooltip-bottom')) {
-                    $(this).data('placement', 'left');
+                    $(this).attr('data-placement', 'left');
                 }
             });
         }
@@ -148,11 +172,37 @@
         $('#timezone').text(timezone);
 
         // CURRENTLY
+        var jsonNow = {
+            time: currently.time,
+            summary: currently.summary,
+            icon: currently.icon,
+            temperature: currently.temperature,
+            apparentTemperature: currently.apparentTemperature,
+            cloudCover: currently.cloudCover,
+            precipIntensity: currently.precipIntensity,
+            precipProbability: currently.precipProbability,
+            windSpeed: currently.windSpeed,
+            windBearing: currently.windBearing
+        };
+        $.ajax({
+            url: '@Url.Action("Currently", "Weather")',
+            type: 'get',
+            data: jsonNow,
+            datatype: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $('#now').html(data);
+            },
+            error: function (request, status, err) {
+                //alert(status);
+                //alert(err);
+            }
+        });
 
         // DAILY
         $.each(daily.data, function (i, item) {
 
-            var json = {
+            var jsonDaily = {
                 time: item.time,
                 summary: item.summary,
                 icon: item.icon,
@@ -173,11 +223,11 @@
             $.ajax({
                 url: '@Url.Action("Daily", "Weather")',
                 type: 'get',
-                data: json,
+                data: jsonDaily,
                 datatype: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    $('#daily-' + i).replaceWith(data);
+                    $('#daily-' + i).html(data);
                 },
                 error: function (request, status, err) {
                     //alert(status);
@@ -190,12 +240,12 @@
         // HOURLY
         $.each(hourly.data, function (i, item) {
             $('#hourly-content').append('<div id="hourly-' + i + '"></div>');
-            var json = {
+            var jsonHourly = {
                 time: item.time,
                 summary: item.summary,
                 icon: item.icon,
                 temperature: item.temperature,
-                apparentTemperature : item.apparentTemperature,
+                apparentTemperature: item.apparentTemperature,
                 cloudCover: item.cloudCover,
                 precipIntensity: item.precipIntensity,
                 precipProbability: item.precipProbability,
@@ -205,11 +255,11 @@
             $.ajax({
                 url: '@Url.Action("Hourly", "Weather")',
                 type: 'get',
-                data: json,
+                data: jsonHourly,
                 datatype: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    $('#hourly-' + i).replaceWith(data);
+                    $('#hourly-' + i).html(data);
                 },
                 error: function (request, status, err) {
                     //alert(status);

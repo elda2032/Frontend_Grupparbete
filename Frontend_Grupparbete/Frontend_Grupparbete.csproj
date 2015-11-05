@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="Models\MixItUpViewModel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Weather\CurrentlyWeather.cs" />
     <Compile Include="Models\Weather\DailyWeather.cs" />
     <Compile Include="Models\Weather\HourlyWeather.cs" />
     <Compile Include="Models\Weather\WeatherModel.cs" />
@@ -170,6 +171,7 @@
     <Content Include="Views\Weather\_Hourly.cshtml" />
     <Content Include="Views\DataTable\Index.cshtml" />
     <Content Include="Views\Three\Index.cshtml" />
+    <Content Include="Views\Weather\_Currently.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
