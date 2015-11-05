@@ -140,6 +140,8 @@
     <Compile Include="Models\MixItUpViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Weather\DailyWeather.cs" />
+    <Compile Include="Models\Weather\HourlyWeather.cs" />
+    <Compile Include="Models\Weather\WeatherModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterDatatablesModelBinder.cs" />
     <Compile Include="UserContext.cs" />
@@ -165,6 +167,7 @@
     <Content Include="Font\weathericons-regular-webfont.ttf" />
     <Content Include="Font\weathericons-regular-webfont.woff" />
     <Content Include="Font\weathericons-regular-webfont.woff2" />
+    <Content Include="Views\Weather\_Hourly.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
