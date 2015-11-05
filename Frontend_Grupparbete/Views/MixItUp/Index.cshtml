@@ -17,59 +17,74 @@
         Here you can play around with all the users.<br />
         Have Fun!
     </p>
-    <h3>Settings</h3>
-    <div id="buttons" class="col-md-12 alert-info alert">
+
+    <div id="buttons" class="col-md-2 col-lg-2">
         <div id="sorting">
+            <h3>Sorting</h3>
 
-            <div class="col-md-2">
-                <b>Sorting: </b>
-            </div>
-            <div class="col-md-10">
-                <div class="sort btn btn-warning btn-xs" data-sort="default">Default</div>
-                <div class="sort btn btn-warning btn-xs" data-sort="random">Random</div>
-            </div>
 
-            <div class="col-md-2">
-                <b>Sort By:</b>
-            </div>
-            <div class="col-md-10">
-                <Select id="SortSelect">
-                    <option value="name">First Name</option>
-                    <option value="lastname">Last Name</option>
-                    <option value="email">Email</option>
-                    <option value="salary">Income</option>
-                    <option value="Profession">First Name</option>
-                </Select>
-                <select id="SortDirection">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
-            </div>
+            <select id="SortSelect" class="form input-sm" style="width: 100%">
+                <option value="name">First Name</option>
+                <option value="lastname">Last Name</option>
+                <option value="email">Email</option>
+                <option value="salary">Income</option>
+                <option value="profession">Profession</option>
+            </select>
+
+            <div id="asc" class="btn btn-sm btn-primary active" style="margin: 2px; width: 100%" onclick="setDirection('asc')" >Ascending</div>
+                <div id="desc" class="btn btn-sm btn-primary" style="margin: 2px; width: 100%" onclick="setDirection('desc')">Descending</div>
+
+
+            <div class="sort btn btn-default btn-sm" style="margin: 2px; width: 100%" data-sort="random">Randomize!</div>
+
+
         </div>
 
         <div id="filtering">
-            <div class="col-md-2">
-                <b>Filter by Profession</b>
-            </div>
-            <div class="col-md-10">
-                @Html.DropDownList("Profession", Model.Professions, new { Id = "FilterList" })
-            </div>
-            
+            <h3>Filters</h3>
+
+            <select id="FilterList" name="Profession" class="form input-sm" style="width:100%">
+                <option value="All">Show All</option>
+                <option value="Supreme">Supreme Beeing</option>
+                <option value="Manpower">Manpower</option>
+                <option value="Professional">Professional Haxx0r</option>
+            </select>
+
+
 
         </div>
 
     </div>
-    <h3>Users</h3>
-    <div id="items" class="col-md-12 alert alert-info">
-        @foreach (var p in Model.Users)
-        {
-            <div class="mix @p.Profession btn-danger btn" onclick="manage('@p.Email')" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
-                <b>Name:</b> @p.FirstName @p.LastName<br />
-                <b>Email:</b> @p.Email<br />
-                <b>Profession:</b> @p.Profession<br />
-                <b>Income:</b> @p.Income
-            </div>
-        }
+
+    <div id="items" class="col-md-10 col-lg-10">
+        <h3>Users</h3>
+        <div class="col-lg-6 col-sm-12 col-md-8 itemContainer">
+            @foreach (var p in Model.Users)
+            {
+                <div class="mix modal-content @p.Profession" onclick="manage('@p.Email')" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
+                    <div class="iconContainer">
+                            <img class="icon" src="/content/images/@(p.Profession).jpg" alt="profession icon"/>
+                        </div>
+                    <div class="userInfoContainer">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width: 60px"><b>Name:</b></td>
+                                <td style="text-align: left">@p.FirstName @p.LastName</td>
+                            </tr>
+                            <tr>
+                                <td style="width:60px"><b>Email:</b></td>
+                                <td style="text-align: left">@p.Email</td>
+                            </tr>
+                            <tr>
+                                <td style="width:60px"><b>Income:</b></td>
+                                <td style="text-align: left">@p.Income</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+
     </div>
 
 </div>
@@ -83,10 +98,7 @@
         $('#FilterList').change(function () {
             filter($('option:selected', this).val());
         });
-        $('#SortSelect').change(function() {
-            sort();
-        });
-        $('#SortDirection').change(function () {
+        $('#SortSelect').change(function () {
             sort();
         });
     });
@@ -95,9 +107,20 @@
         window.location.href = "@(Url.Action("Manage","Login"))?email=" + user;
     }
 
+    function setDirection(dir) {
+        $('.btn').removeClass("active");
+        $('#'+dir).addClass('active');
+        sort();
+
+    }
+
     function sort() {
-        var st = $('#SortSelect').val() + ':' + $('#SortDirection').val();
-        $('#Container').mixItUp('sort',st );
+        var dir = "desc";
+        if ($('#asc').hasClass('active')) {
+            dir = "asc";
+        }
+        var st = $('#SortSelect').val() + ':' + dir;
+        $('#Container').mixItUp('sort', st);
     }
     function filter(profession) {
         if (profession === "All")

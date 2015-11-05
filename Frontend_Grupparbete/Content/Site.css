@@ -1,7 +1,15 @@
 ﻿body {
     padding-bottom: 20px;
+    background: #f6f6fa;;
 }
-
+.innerbody {
+    background: white;
+    height: 2000px;
+    margin-top: 0;
+}
+.navbar {
+    margin-bottom: 0;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -15,11 +23,19 @@ textarea {
     max-width: 280px;
 }
 
-
+.itemContainer {
+    padding: 0;
+}
 .mix {
-    margin: 10px;
-    padding: 5px;
+    padding: 2px;
+    width: 100%;
     display: none;
+    background: #f6f6fa;
+    margin-bottom: 8px;
+}
+.mix:hover {
+    cursor: pointer;
+    background: white;
 }
 
 .sort {
@@ -28,4 +44,28 @@ textarea {
 
 select {
     margin: 3px;
+}
+
+#buttons.btn {
+    margin: 2px;
+}
+#buttons.btn-toggle {
+    margin: 2px;
+}
+
+.icon {
+    height: 60px;
+    width: 60px;
+    border-radius: 5px;
+}
+.iconContainer {
+    margin: 2px;
+    float: left;
+    width: 70px;
+    height: 60px;
+    display: inline-block;
+}
+.userInfoContainer {
+    height: 60px;
+    display: inline-block;
 }
