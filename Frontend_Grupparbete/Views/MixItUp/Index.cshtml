@@ -7,18 +7,7 @@
 </div>
 
 <style>
-    .mix {
-        margin: 10px;
-        padding: 5px;
-        display: none;
-    }
 
-    .sort {
-        margin: 5px 0 5px 0;
-    }
-    select {
-        margin: 3px;
-    }
 </style>
 
 
@@ -74,7 +63,7 @@
     <div id="items" class="col-md-12 alert alert-info">
         @foreach (var p in Model.Users)
         {
-            <div class="mix @p.Profession btn-danger" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
+            <div class="mix @p.Profession btn-danger btn" onclick="manage('@p.Email')" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
                 <b>Name:</b> @p.FirstName @p.LastName<br />
                 <b>Email:</b> @p.Email<br />
                 <b>Profession:</b> @p.Profession<br />
@@ -102,15 +91,18 @@
         });
     });
 
+    function manage(user) {
+        window.location.href = "@(Url.Action("Manage","Login"))?email=" + user;
+    }
+
     function sort() {
         var st = $('#SortSelect').val() + ':' + $('#SortDirection').val();
         $('#Container').mixItUp('sort',st );
     }
-
     function filter(profession) {
         if (profession === "All")
             $('#Container').mixItUp('filter', 'all');
         else
-            $('#Container').mixItUp('filter', '.'+profession);
+            $('#Container').mixItUp('filter', '.' + profession);
     }
 </script>

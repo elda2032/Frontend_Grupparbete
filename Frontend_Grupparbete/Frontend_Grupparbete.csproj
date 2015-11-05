@@ -115,6 +115,7 @@
     <Content Include="Content\weather-icons.css" />
     <Content Include="Content\weather-icons.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -164,6 +165,9 @@
     <Content Include="Font\weathericons-regular-webfont.woff" />
     <Content Include="Font\weathericons-regular-webfont.woff2" />
     <Content Include="Views\TheDataTable\Index.cshtml" />
+    <Content Include="Views\Login\_login.cshtml" />
+    <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Login\Manage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
