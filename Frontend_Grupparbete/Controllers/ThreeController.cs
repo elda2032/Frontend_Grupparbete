@@ -11,6 +11,7 @@ namespace Frontend_Grupparbete.Controllers
         // GET: Three
         public ActionResult Index()
         {
+            //http://www.sitepoint.com/building-earth-with-webgl-javascript/
             return View();
         }
     }
