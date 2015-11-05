@@ -2,21 +2,20 @@
 @model Frontend_Grupparbete.Models.Weather.DailyWeather
 
 <div class="center-day-and-icon">
-    @if (Model.Time.Date.Equals(DateTime.Now.Date))
-    {
-        <h4>Today</h4>
-    }
-    else if (Model.Time.Date.Equals(DateTime.Now.AddDays(1).Date))
-    {
-        <h4>Tomorrow</h4>
-    }
-    else
-    {
-        <h4>@Model.Time.ToString("dddd", new CultureInfo("en-US"))</h4>
-    }
-
-    @*<div>@Html.DisplayFor(m => m.Summary)</div>*@
-
+    <div data-toggle="tooltip" data-placement="bottom" title="@Model.Time.ToShortDateString()">
+        @if (Model.Time.Date.Equals(DateTime.Now.Date))
+        {
+            <h4>Today</h4>
+        }
+        else if (Model.Time.Date.Equals(DateTime.Now.AddDays(1).Date))
+        {
+            <h4>Tomorrow</h4>
+        }
+        else
+        {
+            <h4>@Model.Time.ToString("dddd", new CultureInfo("en-US"))</h4>
+        }
+    </div>
 
     <div data-toggle="tooltip" data-placement="bottom" title="@Model.Summary"><span class="wi @Model.Icon weathericon"></span></div>
 </div>
