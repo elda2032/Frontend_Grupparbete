@@ -143,5 +143,26 @@ namespace Frontend_Grupparbete.Controllers
             };
             return PartialView("_Hourly", model);
         }
+
+        public ActionResult Currently(string time, string summary, string icon,
+            decimal temperature, decimal apparentTemperature,
+            decimal cloudCover, decimal precipIntensity, decimal precipProbability,
+            decimal windSpeed, decimal windBearing)
+        {
+            var model = new CurrentlyWeather
+            {
+                Time = ToDateTime(time),
+                Summary = summary,
+                Icon = GetWeatherIcon(icon),
+                Temperature = temperature,
+                ApparentTemperature = apparentTemperature,
+                CloudCover = cloudCover,
+                PrecipIntensity = precipIntensity,
+                PrecipProbability = precipProbability,
+                WindSpeed = windSpeed,
+                WindBearingIcon = GetWindBearingIcon(windBearing)
+            };
+            return PartialView("_Currently", model);
+        }
     }
 }

@@ -4,15 +4,16 @@
     ViewBag.Title = "Index";
     const string str = "**********&nbsp";
 }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.css" />
 
 <script type="text/javascript" src="https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.js"></script>
 <h2>Welcome to the DataTable page</h2>
 
-<table id="mainTable" class="display">
+<table id="mainTable" class="display responsive" width="100%">
     <thead>
     <tr>
-        <th>
+        <th class="all">
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
@@ -21,7 +22,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th>
+        <th class="never">
             @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
