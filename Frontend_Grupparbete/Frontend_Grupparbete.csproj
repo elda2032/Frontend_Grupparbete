@@ -103,7 +103,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\earthmap1k.jpg" />
+    <Content Include="Content\earthspec1k.jpg" />
+    <Content Include="Content\elev_bump_16ka.jpg" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\star-field.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Font\weathericons-regular-webfont.svg" />
     <Content Include="Content\weather-icons-wind.css" />
@@ -115,11 +119,13 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\earth.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\jquery.mixitup.js" />
-    <Content Include="Scripts\terrain.js" />
+    <Content Include="Scripts\orbitControls.js" />
+    <Content Include="Scripts\three.min.js" />
     <Content Include="Struktur.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -169,6 +175,7 @@
     <Content Include="Views\Login\Manage.cshtml" />
     <Content Include="Views\Weather\_Hourly.cshtml" />
     <Content Include="Views\DataTable\Index.cshtml" />
+    <Content Include="Views\Three\OldIndex.cshtml" />
     <Content Include="Views\Three\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
