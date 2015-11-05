@@ -13,10 +13,15 @@ namespace Frontend_Grupparbete.Controllers
         // GET: DataTable get.rekt();
         public ActionResult Index()
         {
-            string userListJson = new JavaScriptSerializer().Serialize(Database.Users.ToList());
-            //System.IO.File.WriteAllText(@"C:\userlist.txt", userListJson);
+            // TODO: Format the list properly, in a similar way as data.txt
+            //var userList = Database.Users.ToList();
+
+
+            //string startFormat = @"{ ""data"": [ ";  
+            //var userListJson = new JavaScriptSerializer().Serialize(userList);
+            //var path = string.Format("{0}DataTableInsanity/userlist.txt", AppDomain.CurrentDomain.BaseDirectory);
+            //System.IO.File.WriteAllText(path, userListJson);
             return View(Database.Users);
         }
-        
     }
 }

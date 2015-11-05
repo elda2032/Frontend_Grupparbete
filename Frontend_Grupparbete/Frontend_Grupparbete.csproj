@@ -157,14 +157,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\TheDataTable\OldIndex.cshtml" />
-    <Content Include="Views\TheDataTable\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Weather\_Daily.cshtml" />
     <Content Include="Font\weathericons-regular-webfont.eot" />
     <Content Include="Font\weathericons-regular-webfont.ttf" />
     <Content Include="Font\weathericons-regular-webfont.woff" />
     <Content Include="Font\weathericons-regular-webfont.woff2" />
+    <Content Include="Views\TheDataTable\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

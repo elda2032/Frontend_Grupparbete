@@ -2,13 +2,16 @@
 
 @{
     ViewBag.Title = "Index";
+    const string str = "**********&nbsp";
 }
+
 <link href="~/DataTableInsanity/myDataTableCssFile.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="~/DataTableInsanity/DataTableMain.js"></script>
 <h2>Welcome to the DataTable page</h2>
 
-<table id="mainTable"class="display">
+<table id="mainTable" class="display">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -28,31 +31,54 @@
         <th>
             @Html.DisplayNameFor(model => model.Income)
         </th>
-        <th></th>
     </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Income)
+            </th>
+        </tr>
+    </tfoot>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.Raw(str);
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profession)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Income)
+            </td>
+        </tr>
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Profession)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Income)
-        </td>
-    </tr>
-}
 </table>
 <script>
     $('#mainTable').dataTable();
