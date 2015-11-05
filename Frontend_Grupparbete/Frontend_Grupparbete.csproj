@@ -109,6 +109,11 @@
     <Content Include="DataTableInsanity\myDataTableCssFile.css" />
     <Content Include="DataTableInsanity\DataTableMain.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Font\weathericons-regular-webfont.svg" />
+    <Content Include="Content\weather-icons-wind.css" />
+    <Content Include="Content\weather-icons-wind.min.css" />
+    <Content Include="Content\weather-icons.css" />
+    <Content Include="Content\weather-icons.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -134,6 +139,7 @@
     </Compile>
     <Compile Include="Models\MixItUpViewModel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Weather\DailyWeather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterDatatablesModelBinder.cs" />
     <Compile Include="UserContext.cs" />
@@ -151,9 +157,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\TheDataTable\OldIndex.cshtml" />
-    <Content Include="Views\TheDataTable\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Weather\_Daily.cshtml" />
+    <Content Include="Font\weathericons-regular-webfont.eot" />
+    <Content Include="Font\weathericons-regular-webfont.ttf" />
+    <Content Include="Font\weathericons-regular-webfont.woff" />
+    <Content Include="Font\weathericons-regular-webfont.woff2" />
+    <Content Include="Views\TheDataTable\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
