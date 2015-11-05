@@ -5,7 +5,7 @@
     <div class="col-md-3">
         <div class="row" style="margin-top: 0;">
             <div class="col-md-7">
-                <h3>@Model.Time.ToString("t")</h3>
+                <h3 data-toggle="tooltip" data-placement="left" title="@Model.Time.ToShortDateString()">@Model.Time.ToString("t")</h3>
             </div>
             <div class="col-md-5">
                 <div class="hourly-2xfont" data-toggle="tooltip" data-placement="left" title="@Model.Summary"><span class="wi @Model.Icon weathericon-hourly"></span></div>

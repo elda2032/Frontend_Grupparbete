@@ -1,5 +1,4 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -7,6 +6,10 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.main-navbar {
+    border-radius: 0;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
