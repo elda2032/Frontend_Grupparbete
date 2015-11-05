@@ -8,7 +8,7 @@ using Frontend_Grupparbete.Models;
 
 namespace Frontend_Grupparbete.Controllers
 {
-    public class TheDataTableController : DatabaseController
+    public class DataTableController : DatabaseController
     {
         // GET: DataTable get.rekt();
         public ActionResult Index()
