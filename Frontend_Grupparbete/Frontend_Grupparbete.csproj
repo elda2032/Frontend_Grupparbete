@@ -106,9 +106,10 @@
     <Content Include="Content\earthmap1k.jpg" />
     <Content Include="Content\earthspec1k.jpg" />
     <Content Include="Content\elev_bump_16ka.jpg" />
-    <Content Include="Content\Images\professional haxx0r.jpg" />
-    <Content Include="Content\Images\manpower.jpg" />
-    <Content Include="Content\Images\supreme beeing.jpg" />
+    <Content Include="Content\Images\McDonalds.jpg" />
+    <Content Include="Content\Images\Blizzard.jpg" />
+    <Content Include="Content\Images\Apple.jpg" />
+    <Content Include="Content\Images\placeholder.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\star-field.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

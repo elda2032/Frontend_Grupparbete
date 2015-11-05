@@ -36,27 +36,27 @@ namespace Frontend_Grupparbete.Controllers
                         LastName = "Dallas",
                         Income = 80,
                         Password = "magic",
-                        Profession = "Supreme Beeing"
+                        Profession = "McDonalds"
                     });
             this.Database.Users.Add(
                 new User()
                     {
-                        Email = "gmail@gmail.com",
+                        Email = "Nisse@Apple.com",
                         FirstName = "Nisse",
-                        LastName = "Lite",
+                        LastName = "Tomte",
                         Income = 2000,
                         Password = "magic",
-                        Profession = "Manpower"
+                        Profession = "Apple"
                     });
             this.Database.Users.Add(
                 new User()
                     {
-                        Email = "Stefanbjerkell@gmail.com",
+                        Email = "Stefanbjerkell@blizzard.com.com",
                         FirstName = "Stefan",
                         LastName = "Bjerkell",
                         Income = 5000000,
                         Password = "magic",
-                        Profession = "Professional Haxx0r"
+                        Profession = "Blizzard"
                     });
             this.Database.Users.Add(AddUser("Dude@mailinator.com", "Henry", "Chuckle", 45000, "tragic", "Cheesecake Consumer"));
             this.Database.Users.Add(AddUser("PizzaGuy@mailinator.com", "Frank", "Pastrami", 9, "tragic", "Pizza Delivery Guy"));

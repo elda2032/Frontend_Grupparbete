@@ -63,7 +63,7 @@
             {
                 <div class="mix modal-content @p.Profession" onclick="manage('@p.Email')" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
                     <div class="iconContainer">
-                            <img class="icon" src="/content/images/@(p.Profession).jpg" alt="profession icon"/>
+                            <img class="icon" src="/content/images/@(p.Profession).jpg" alt="profession icon" onerror="this.src = '/content/images/placeholder.jpg';"/>
                         </div>
                     <div class="userInfoContainer">
                         <table style="width:100%">
