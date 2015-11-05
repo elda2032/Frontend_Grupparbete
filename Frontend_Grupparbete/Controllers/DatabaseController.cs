@@ -29,9 +29,9 @@ namespace Frontend_Grupparbete.Controllers
             this.Database.Users.Add(
                 new User()
                     {
-                        Email = "Lelo@gmail.com",
-                        FirstName = "Lelo",
-                        LastName = "Dalas",
+                        Email = "Leelo@gmail.com",
+                        FirstName = "Leelo",
+                        LastName = "Dallas",
                         Income = 80,
                         Password = "magic",
                         Profession = "Supreme Beeing"
