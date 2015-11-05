@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css">
     <link href="~/Content/weather-icons.min.css" rel="stylesheet" />
     <link href="~/Content/weather-icons-wind.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
@@ -38,12 +39,7 @@
                     <li>@Html.ActionLink("Clock", "Index", "Clock")</li>
                    
                 </ul>
-
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Login", "Index", "Login")</li>
-
-                </ul>
+                @Html.Action("LoginPartial","Login")
             </div>
         </div>
     </nav>

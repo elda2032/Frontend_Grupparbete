@@ -92,7 +92,7 @@ namespace Frontend_Grupparbete.Controllers
 
         private string GetWindBearingIcon(decimal windBearing)
         {
-            return string.Format("wi-wind.towards-{0}-deg", Math.Round(windBearing));
+            return string.Format("wi-wind towards-{0}-deg", Math.Round(windBearing));
         }
 
         public ActionResult Daily(string time, string summary, string icon,
@@ -121,6 +121,27 @@ namespace Frontend_Grupparbete.Controllers
                 MoonIcon = GetMoonIcon(moonPhase)
             };
             return PartialView("_Daily", model);
+        }
+
+        public ActionResult Hourly(string time, string summary, string icon,
+            decimal temperature, decimal apparentTemperature,
+            decimal cloudCover, decimal precipIntensity, decimal precipProbability,
+            decimal windSpeed, decimal windBearing)
+        {
+            var model = new HourlyWeather
+            {
+                Time = ToDateTime(time),
+                Summary = summary,
+                Icon = GetWeatherIcon(icon),
+                Temperature = temperature,
+                ApparentTemperature = apparentTemperature,
+                CloudCover = cloudCover,
+                PrecipIntensity = precipIntensity,
+                PrecipProbability = precipProbability,
+                WindSpeed = windSpeed,
+                WindBearingIcon = GetWindBearingIcon(windBearing)
+            };
+            return PartialView("_Hourly", model);
         }
     }
 }

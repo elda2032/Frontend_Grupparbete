@@ -4,6 +4,49 @@
     ViewBag.Title = "Weather";
 }
 
+<style>
+    .weathericon {
+        font-size: 4em;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .weathericon-hourly {
+        /*font-size: 2em;
+        line-height: 2em;*/
+    }
+    #daily hr {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .center-day-and-icon {
+        text-align: center;
+    }
+    .col-split:first-of-type {
+        padding-right: 0;
+    }
+    .col-split:last-of-type {
+        padding-left: 0;
+    }
+    .hourly-2xfont {
+        font-size: 2em;
+    }
+    .font-1-5-em {
+        font-size: 1.5em;
+    }
+    #hourly-content .row:first-child {
+        margin-top: 20px;
+    }
+    #hourly-content h3 {
+        margin-top: 10px;
+    }
+    @@media (max-width: 768px) {
+        .daily-div {
+            border-top: 2px gray solid;
+            margin-top: 20px;
+        }
+    }
+</style>
+
 <h2>Weather <a href="#" id="update-api">Update api</a></h2>
 <br/>
 <span class="label label-default">Timezone: </span><span id="timezone"></span>
@@ -23,32 +66,34 @@
         <div role="tabpanel" class="tab-pane" id="now">now</div>
         <div role="tabpanel" class="tab-pane active" id="daily">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="col-md-3"><div id="daily-0"></div></div>
-                    <div class="col-md-3"><div id="daily-1"></div></div>
-                    <div class="col-md-3"><div id="daily-2"></div></div>
-                    <div class="col-md-3"><div id="daily-3"></div></div>
+                <div class="col-md-6 col-split">
+                    <div class="col-md-3 daily-div"><div id="daily-0" ></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-1" ></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-2" ></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-3" ></div></div>
                 </div>
-                <div class="col-md-6">
-                    <div class="col-md-3"><div id="daily-4"></div></div>
-                    <div class="col-md-3"><div id="daily-5"></div></div>
-                    <div class="col-md-3"><div id="daily-6"></div></div>
-                    <div class="col-md-3"><div id="daily-7"></div></div>
+                <div class="col-md-6 col-split">
+                    <div class="col-md-3 daily-div"><div id="daily-4" ></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-5" ></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-6" ></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-7" ></div></div>
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="hourly">hourly</div>
+        <div role="tabpanel" class="tab-pane" id="hourly">
+            <div class="col-md-offset-1 col-md-10" id="hourly-content"></div>
+        </div>
     </div>
 
 </div>
 
 <script>
-    $(function() {
+    $(function () {
 
         var latitude = '59.329323';
         var longitude = '18.068581';
 
-        $('#update-api').click(function() {
+        $('#update-api').click(function () {
             $.ajax({
                 url: 'https://api.forecast.io/forecast/44c7cdd00e0f82699006ed275eb2b6cf/' + latitude + ',' + longitude + '?units=si',
                 type: 'GET',
@@ -59,10 +104,13 @@
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log('Error in Operation');
+                },
+                complete: function () {
+                    $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
                 }
             });
         });
-        
+
 
     });
 
@@ -113,12 +161,40 @@
                 }
             });
         });
-        
+
 
         // HOURLY
+        $.each(hourly.data, function (i, item) {
+
+            var json = {
+                time: item.time,
+                summary: item.summary,
+                icon: item.icon,
+                temperature: item.temperature,
+                apparentTemperature : item.apparentTemperature,
+                cloudCover: item.cloudCover,
+                precipIntensity: item.precipIntensity,
+                precipProbability: item.precipProbability,
+                windSpeed: item.windSpeed,
+                windBearing: item.windBearing
+            };
+            $.ajax({
+                url: '@Url.Action("Hourly", "Weather")',
+                type: 'get',
+                data: json,
+                datatype: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $('#hourly-content').append(data);
+                },
+                error: function (request, status, err) {
+                    //alert(status);
+                    //alert(err);
+                }
+            });
+        });
 
 
-        $('[data-toggle="tooltip"]').tooltip();
     }
 
 </script>

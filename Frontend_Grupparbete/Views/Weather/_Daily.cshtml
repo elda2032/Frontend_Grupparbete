@@ -1,38 +1,50 @@
 ﻿@using System.Globalization
 @model Frontend_Grupparbete.Models.Weather.DailyWeather
 
-
-<style>
-    .weathericon {
-        font-size: 2em;
+<div class="center-day-and-icon">
+    @if (Model.Time.Date.Equals(DateTime.Now.Date))
+    {
+        <h4>Today</h4>
     }
-</style>
+    else if (Model.Time.Date.Equals(DateTime.Now.AddDays(1).Date))
+    {
+        <h4>Tomorrow</h4>
+    }
+    else
+    {
+        <h4>@Model.Time.ToString("dddd", new CultureInfo("en-US"))</h4>
+    }
 
-<h4>@Model.Time.ToString("dddd", new CultureInfo("en-US"))</h4>
-
-<div>@Html.DisplayFor(m => m.Summary)</div>
+    @*<div>@Html.DisplayFor(m => m.Summary)</div>*@
 
 
-<div><span class="wi @Model.Icon weathericon"></span></div>
+    <div data-toggle="tooltip" data-placement="bottom" title="@Model.Summary"><span class="wi @Model.Icon weathericon"></span></div>
+</div>
+<hr/>
+<div data-toggle="tooltip" data-placement="left" title="Max temperature"><span class="wi wi-thermometer"></span> <span>@Math.Round(Model.TempMax) &deg;C (@Model.TempMaxTime.ToString("HH:mm"))</span></div>
 
-<div>@Html.LabelFor(m => m.TempMax, "Max temperature") <span>@Model.TempMax &deg;C (@Model.TempMaxTime.ToString("HH:mm"))</span></div>
+<div data-toggle="tooltip" data-placement="left" title="Min temperature"><span class="wi wi-thermometer-exterior"></span> <span>@Math.Round(Model.TempMin) &deg;C (@Model.TempMinTime.ToString("HH:mm"))</span></div>
 
-<div>@Html.LabelFor(m => m.TempMin, "Min temperature") <span>@Model.TempMin &deg;C (@Model.TempMinTime.ToString("HH:mm"))</span></div>
+<hr/>
 
-<div>@Html.LabelFor(m => m.CloudCover) <span>@String.Format("{0:P0}", Model.CloudCover)</span></div>
+<div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Cloud cover"><span class="wi wi-cloudy"></span> <span>@String.Format("{0:P0}", Model.CloudCover)</span></div>
 
-<div>@Html.LabelFor(m => m.PrecipIntensity) <span>@Model.PrecipIntensity mm/h (max @Model.PrecipIntensityMax mm/h)</span></div>
+<hr/>
+<div>
+    @Html.LabelFor(m => m.PrecipIntensity) <span>@Model.PrecipIntensity mm/h (max @Model.PrecipIntensityMax mm/h)</span>
+</div>
 
 <div>@Html.LabelFor(m => m.PrecipProbability) <span>@String.Format("{0:P0}", Model.PrecipProbability)</span></div>
 
-@* TODO - Wind icon not showing??????? *@
+<hr/>
 <div>@Html.Label("Wind") <span>@Model.WindSpeed m/s </span><span class="wi @Model.WindBearingIcon"></span></div>
 
-<div data-toggle="tooltip" data-placement="bottom" title="Sunrise"><span class="wi wi-sunrise"></span> @Model.SunriseTime.ToString("HH:mm")</div>
+<hr/>
+<div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunrise"><span class="wi wi-sunrise"></span> @Model.SunriseTime.ToString("HH:mm")</div>
 
-<div data-toggle="tooltip" data-placement="bottom" title="Sunset"><span class="wi wi-sunset"></span> @Model.SunsetTime.ToString("HH:mm")</div>
-
-<div>@Html.Label("Moon") <span class="wi @Model.MoonIcon"></span></div>
+<div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunset"><span class="wi wi-sunset"></span> @Model.SunsetTime.ToString("HH:mm")</div>
+<hr/>
+<div class="font-1-5-em">@Html.Label("Moon") <span class="wi @Model.MoonIcon"></span></div>
 
 
 
