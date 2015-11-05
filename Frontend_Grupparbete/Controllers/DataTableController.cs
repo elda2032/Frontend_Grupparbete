@@ -8,15 +8,12 @@ using Frontend_Grupparbete.Models;
 
 namespace Frontend_Grupparbete.Controllers
 {
-    public class TheDataTableController : DatabaseController
+    public class DataTableController : DatabaseController
     {
         // GET: DataTable get.rekt();
         public ActionResult Index()
         {
-            string userListJson = new JavaScriptSerializer().Serialize(Database.Users.ToList());
-            //System.IO.File.WriteAllText(@"C:\userlist.txt", userListJson);
             return View(Database.Users);
         }
-        
     }
 }

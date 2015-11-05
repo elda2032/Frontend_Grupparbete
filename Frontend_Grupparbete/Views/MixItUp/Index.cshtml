@@ -8,12 +8,6 @@
 
 <style>
     .mix {
-        display: inline-block;
-        /*color: white;
-
-        background: #a0522d;
-        border: 2px solid black;*/
-        border-radius: 3px;
         margin: 10px;
         padding: 5px;
         display: none;
@@ -21,6 +15,9 @@
 
     .sort {
         margin: 5px 0 5px 0;
+    }
+    select {
+        margin: 3px;
     }
 </style>
 
@@ -35,18 +32,18 @@
     <div id="buttons" class="col-md-12 alert-info alert">
         <div id="sorting">
 
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <b>Sorting: </b>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="sort btn btn-warning btn-xs" data-sort="default">Default</div>
                 <div class="sort btn btn-warning btn-xs" data-sort="random">Random</div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <b>Sort By:</b>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <Select id="SortSelect">
                     <option value="name">First Name</option>
                     <option value="lastname">Last Name</option>
@@ -62,10 +59,10 @@
         </div>
 
         <div id="filtering">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <b>Filter by Profession</b>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 @Html.DropDownList("Profession", Model.Professions, new { Id = "FilterList" })
             </div>
             
@@ -106,8 +103,7 @@
     });
 
     function sort() {
-        var st = $('#SortSelect:selected').val() + ':' + $('#SortDirection:selected').val();
-        alert(st);
+        var st = $('#SortSelect').val() + ':' + $('#SortDirection').val();
         $('#Container').mixItUp('sort',st );
     }
 

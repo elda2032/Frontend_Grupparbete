@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\TheDataTableController.cs" />
+    <Compile Include="Controllers\DataTableController.cs" />
     <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -143,7 +143,6 @@
     <Compile Include="Models\Weather\HourlyWeather.cs" />
     <Compile Include="Models\Weather\WeatherModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterDatatablesModelBinder.cs" />
     <Compile Include="UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,8 +158,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\TheDataTable\OldIndex.cshtml" />
-    <Content Include="Views\TheDataTable\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Weather\_Daily.cshtml" />
     <Content Include="Font\weathericons-regular-webfont.eot" />
@@ -168,6 +165,7 @@
     <Content Include="Font\weathericons-regular-webfont.woff" />
     <Content Include="Font\weathericons-regular-webfont.woff2" />
     <Content Include="Views\Weather\_Hourly.cshtml" />
+    <Content Include="Views\DataTable\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
