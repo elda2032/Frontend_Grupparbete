@@ -1,8 +1,8 @@
 ﻿@using System.Globalization
 @model Frontend_Grupparbete.Models.Weather.DailyWeather
 
-<div class="center-day-and-icon">
-    <div data-toggle="tooltip" data-placement="bottom" title="@Model.Time.ToShortDateString()">
+<div>
+    <div data-toggle="tooltip" data-placement="left" title="@Model.Time.ToShortDateString()">
         @if (Model.Time.Date.Equals(DateTime.Now.Date))
         {
             <h4>Today</h4>
@@ -17,7 +17,7 @@
         }
     </div>
 
-    <div data-toggle="tooltip" data-placement="bottom" title="@Model.Summary"><span class="wi @Model.Icon weathericon"></span></div>
+    <div data-toggle="tooltip" data-placement="bottom" class="tooltip-bottom" title="@Model.Summary"><span class="wi @Model.Icon weathericon"></span></div>
 </div>
 <hr/>
 <div data-toggle="tooltip" data-placement="left" title="Max temperature"><span class="wi wi-thermometer"></span> <span>@Math.Round(Model.TempMax) &deg;C (@Model.TempMaxTime.ToString("HH:mm"))</span></div>
@@ -26,24 +26,43 @@
 
 <hr/>
 
-<div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Cloud cover"><span class="wi wi-cloudy"></span> <span>@String.Format("{0:P0}", Model.CloudCover)</span></div>
+<div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Cloud cover"><span class="wi wi-cloud"></span> <span>@String.Format("{0:P0}", Model.CloudCover)</span></div>
+
+<hr/>
+
+@{
+    var precipTooltip = "Precipitation";
+    if (Model.TempMin >= 0)
+    {
+        precipTooltip = "Rain";
+    }
+    else if (Model.TempMax < 0)
+    {
+        precipTooltip = "Snow";
+    }
+}
+<div data-toggle="tooltip" data-placement="left" title="@precipTooltip" >
+    <span class="wi wi-umbrella"></span>&nbsp;
+    <span>@Math.Round(Model.PrecipIntensity, 1) mm/h</span>
+    <div>max @Math.Round(Model.PrecipIntensityMax, 1) mm/h</div>
+    <div>probability @String.Format("{0:P0}", Model.PrecipProbability)</div>
+</div>
+
+<hr/>
+<div data-toggle="tooltip" data-placement="left" title="Wind">
+    <span class="wi wi-strong-wind"></span>
+    <span> @Model.WindSpeed m/s </span><span class="wi @Model.WindBearingIcon"></span>
+</div>
 
 <hr/>
 <div>
-    @Html.LabelFor(m => m.PrecipIntensity) <span>@Model.PrecipIntensity mm/h (max @Model.PrecipIntensityMax mm/h)</span>
+    <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunrise"><span class="wi wi-sunrise"></span> @Model.SunriseTime.ToString("HH:mm")</div>
+
+    <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunset"><span class="wi wi-sunset"></span> @Model.SunsetTime.ToString("HH:mm")</div>
+
+    <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Moon phase"><span class="wi @Model.MoonIcon"></span></div>
 </div>
-
-<div>@Html.LabelFor(m => m.PrecipProbability) <span>@String.Format("{0:P0}", Model.PrecipProbability)</span></div>
-
 <hr/>
-<div>@Html.Label("Wind") <span>@Model.WindSpeed m/s </span><span class="wi @Model.WindBearingIcon"></span></div>
-
-<hr/>
-<div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunrise"><span class="wi wi-sunrise"></span> @Model.SunriseTime.ToString("HH:mm")</div>
-
-<div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunset"><span class="wi wi-sunset"></span> @Model.SunsetTime.ToString("HH:mm")</div>
-<hr/>
-<div class="font-1-5-em">@Html.Label("Moon") <span class="wi @Model.MoonIcon"></span></div>
 
 
 

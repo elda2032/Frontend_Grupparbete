@@ -14,6 +14,9 @@
         /*font-size: 2em;
         line-height: 2em;*/
     }
+    .daily-div {
+        text-align: center;
+    }
     #daily hr {
         margin-bottom: 10px;
         margin-top: 10px;
@@ -44,6 +47,9 @@
             border-top: 2px gray solid;
             margin-top: 20px;
         }
+        .tab-content div {
+            text-align: center;
+        }
     }
 </style>
 
@@ -65,18 +71,18 @@
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane" id="now">now</div>
         <div role="tabpanel" class="tab-pane active" id="daily">
-            <div class="row">
+            <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6 col-split">
-                    <div class="col-md-3 daily-div"><div id="daily-0" ></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-1" ></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-2" ></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-3" ></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-0"></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-1"></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-2"></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-3"></div></div>
                 </div>
                 <div class="col-md-6 col-split">
-                    <div class="col-md-3 daily-div"><div id="daily-4" ></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-5" ></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-6" ></div></div>
-                    <div class="col-md-3 daily-div"><div id="daily-7" ></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-4"></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-5"></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-6"></div></div>
+                    <div class="col-md-3 daily-div"><div id="daily-7"></div></div>
                 </div>
             </div>
         </div>
@@ -107,12 +113,30 @@
                 },
                 complete: function () {
                     $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+                    setTooltipPositions();
                 }
             });
         });
 
-
+        $(window).resize(function () {
+            setTooltipPositions();   
+        });
+        
     });
+
+    function setTooltipPositions() {
+        if ($(window).width() < 768) {
+            $.each($('[data-toggle="tooltip"]'), function() {
+                $(this).data('placement', 'bottom');
+            });
+        } else {
+            $.each($('[data-toggle="tooltip"]'), function () {
+                if (!$(this).hasClass('tooltip-bottom')) {
+                    $(this).data('placement', 'left');
+                }
+            });
+        }
+    }
 
     function updateWeather(json) {
 
@@ -165,7 +189,7 @@
 
         // HOURLY
         $.each(hourly.data, function (i, item) {
-
+            $('#hourly-content').append('<div id="hourly-' + i + '"></div>');
             var json = {
                 time: item.time,
                 summary: item.summary,
@@ -185,7 +209,7 @@
                 datatype: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    $('#hourly-content').append(data);
+                    $('#hourly-' + i).replaceWith(data);
                 },
                 error: function (request, status, err) {
                     //alert(status);

@@ -118,7 +118,8 @@ namespace Frontend_Grupparbete.Controllers
                 WindBearingIcon = GetWindBearingIcon(windBearing),
                 SunriseTime = ToDateTime(sunriseTime),
                 SunsetTime = ToDateTime(sunsetTime),
-                MoonIcon = GetMoonIcon(moonPhase)
+                MoonIcon = GetMoonIcon(moonPhase),
+                MoonPhase = moonPhase
             };
             return PartialView("_Daily", model);
         }
