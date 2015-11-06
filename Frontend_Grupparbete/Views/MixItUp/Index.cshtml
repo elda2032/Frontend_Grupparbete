@@ -43,15 +43,7 @@
         <div id="filtering">
             <h3>Filters</h3>
 
-            <select id="FilterList" name="Profession" class="form input-sm" style="width:100%">
-                <option value="All">Show All</option>
-                <option value="Supreme">Supreme Beeing</option>
-                <option value="Manpower">Manpower</option>
-                <option value="Professional">Professional Haxx0r</option>
-            </select>
-
-
-
+            @Html.DropDownList("Profession", Model.Professions, new{Id = "FilterList", @class="form input-sm", style="width:100%" })
         </div>
 
     </div>
