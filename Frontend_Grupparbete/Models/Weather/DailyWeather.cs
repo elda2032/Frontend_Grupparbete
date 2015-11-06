@@ -15,5 +15,7 @@ namespace Frontend_Grupparbete.Models.Weather
         public DateTime SunriseTime { get; set; }
         public DateTime SunsetTime { get; set; }
         public string MoonIcon { get; set; }
+
+        public string WeatherImage { get; set; }
     }
 }

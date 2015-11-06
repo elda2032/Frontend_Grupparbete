@@ -8,61 +8,100 @@
         margin-top: 10px;
         margin-bottom: 10px;
     }
+
     .weathericon-hourly {
         /*font-size: 2em;
         line-height: 2em;*/
     }
+
     .daily-div {
         text-align: center;
+        padding-top: 10px;
     }
+
     #daily hr {
         margin-bottom: 10px;
         margin-top: 10px;
     }
+
     .center-day-and-icon {
         text-align: center;
     }
+
     .col-split:first-of-type {
         padding-right: 0;
     }
+
     .col-split:last-of-type {
         padding-left: 0;
     }
+
     .hourly-2xfont {
         font-size: 2em;
     }
+
     .font-1-5-em {
         font-size: 1.5em;
     }
+
     #hourly-content .row:first-child {
         margin-top: 20px;
     }
+
     #hourly-content h3 {
         margin-top: 10px;
     }
+
     @@media (max-width: 768px) {
-        .daily-div {
+        #daily .image-wrapper {
             border-top: 2px gray solid;
+            /*background-position-x: 0 !important;*/
+        }
+
+        .daily-div {
             margin-top: 20px;
         }
+
         .tab-content div {
             text-align: center;
         }
+
         .col-split {
             padding-right: 0;
             padding-left: 0;
         }
     }
+
+    #now .row:first-child {
+        margin-top: 20px;
+    }
+
+    .image-wrapper {
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        opacity: 0.3;
+        left: 10px;
+        right: 10px;
+    }
+
+    .background-pos-0 { background-position-x: 0; }
+    .background-pos-68 { background-position-x: -68px; }
+    .background-pos-100 { background-position-x: -100px; }
+    .background-pos-168 { background-position-x: -168px; }
+    .background-pos-300 { background-position-x: -300px; }
+    .background-pos-385 { background-position-x: -385px; }
 </style>
 
-<h2>                                                                                                            
+<h2>
     Weather
-    <input type="text" class="form-control" id="search-location" style="display: inline-block;" />
+    <input type="text" class="form-control" id="search-location" style="display: inline-block;" value="Stockholm"/>
     <input type="button" class="btn btn-default" id="search" value="Search" />
 </h2>
 <br />
-<div><span class="h3">Location</span> <span id="location"></span></div>
-<div><span class="h4">Timezone: </span><span id="timezone"></span></div>
+<div><span class="h3">Location</span>&nbsp;<span id="location"></span></div>
+<div><span class="h4">Timezone</span>&nbsp;<span id="timezone"></span></div>
 <hr />
 
 <div>
@@ -76,7 +115,13 @@
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane" id="now">now</div>
+        <div role="tabpanel" class="tab-pane" id="now">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6" id="currently">
+
+                </div>
+            </div>
+        </div>
         <div role="tabpanel" class="tab-pane active" id="daily">
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6 col-split">
@@ -105,7 +150,7 @@
 
 <script>
     $(function () {
-        
+
         $('#search').click(function () {
 
             var geocoder = new google.maps.Geocoder();
@@ -132,10 +177,10 @@
                         },
                         complete: function () {
                             $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
-                            setTooltipPositions();
+                            setTooltipAndImagePositions();
                         }
                     });
-                    
+
                 } else {
                     alert('Invalid address: ' + $('#search-location').val());
                 }
@@ -143,20 +188,46 @@
         });
 
         $(window).resize(function () {
-            setTooltipPositions();
+            setTooltipAndImagePositions();
         });
 
     });
 
-    function setTooltipPositions() {
+    function setTooltipAndImagePositions() {
         if ($(window).width() < 768) {
             $.each($('[data-toggle="tooltip"]'), function () {
                 $(this).attr('data-placement', 'bottom');
             });
+
+            $.each($('#daily .image-wrapper'), function() {
+                var imgurl = $(this).css('background-image').replace(/.*\s?url\([\'\"]?/, '').replace(/[\'\"]?\).*/, '');
+                var img = imgurl.substr(imgurl.lastIndexOf('/') + 1);
+                $('#' + this.id).removeClass('background-pos-0').removeClass('background-pos-100').removeClass('background-pos-168').removeClass('background-pos-300').removeClass('background-pos-385').removeClass('background-pos-68');
+                if (img === "wind.jpg") {
+                    $('#' + this.id).addClass('background-pos-100');
+                } else {
+                    $('#' + this.id).addClass('background-pos-0');
+                }
+            });
+
         } else {
             $.each($('[data-toggle="tooltip"]'), function () {
                 if (!$(this).hasClass('tooltip-bottom')) {
                     $(this).attr('data-placement', 'left');
+                }
+            });
+            $.each($('#daily .image-wrapper'), function () {
+                var imgurl = $(this).css('background-image').replace(/.*\s?url\([\'\"]?/, '').replace(/[\'\"]?\).*/, '');
+                var img = imgurl.substr(imgurl.lastIndexOf('/') + 1);
+                $('#' + this.id).removeClass('background-pos-0').removeClass('background-pos-100').removeClass('background-pos-168').removeClass('background-pos-300').removeClass('background-pos-385').removeClass('background-pos-68');
+                if (img === "fog.jpg" || img === "clear-night.jpg") {
+                    $('#' + this.id).addClass('background-pos-300');
+                } else if (img === "wind.jpg") {
+                    $('#' + this.id).addClass('background-pos-385');
+                } else if (img === "clear-day.jpg") {
+                    $('#' + this.id).addClass('background-pos-68');
+                } else {
+                    $('#' + this.id).addClass('background-pos-168');
                 }
             });
         }
@@ -191,7 +262,7 @@
             datatype: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $('#now').html(data);
+                $('#currently').html(data);
             },
             error: function (request, status, err) {
                 //alert(status);

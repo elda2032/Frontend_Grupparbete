@@ -4,5 +4,7 @@
     {
         public decimal Temperature { get; set; }
         public decimal ApparentTemperature { get; set; }
+
+        public string WeatherImage { get; set; }
     }
 }

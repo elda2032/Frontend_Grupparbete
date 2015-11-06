@@ -23,30 +23,60 @@ namespace Frontend_Grupparbete.Controllers
 
         private string GetWeatherIcon(string icon)
         {
+            string weathericon, weatherimage;
+            GetWeatherIconAndImage(icon, out weathericon, out weatherimage);
+            return weathericon;
+        }
+        
+        private void GetWeatherIconAndImage(string icon, out string weathericon, out string weatherimage)
+        {
+            weatherimage = string.Empty;
             switch (icon)
             {
                 case "clear-day":
-                    return "wi-day-sunny";
+                    weatherimage = "clear-day.jpg";
+                    weathericon = "wi-day-sunny";
+                    break;
                 case "clear-night":
-                    return "wi-night-clear";
+                    weatherimage = "clear-night.jpg";
+                    weathericon = "wi-night-clear";
+                    break;
                 case "rain":
-                    return "wi-rain";
+                    weatherimage = "rain.jpg";
+                    weathericon = "wi-rain";
+                    break;
                 case "snow":
-                    return "wi-snow";
+                    weatherimage = "snow.jpg";
+                    weathericon = "wi-snow";
+                    break;
                 case "sleet":
-                    return "wi-sleet";
+                    weatherimage = "sleet.jpg";
+                    weathericon = "wi-sleet";
+                    break;
                 case "wind":
-                    return "wi-strong-wind";
+                    weatherimage = "wind.jpg";
+                    weathericon = "wi-strong-wind";
+                    break;
                 case "fog":
-                    return "wi-fog";
+                    weatherimage = "fog.jpg";
+                    weathericon = "wi-fog";
+                    break;
                 case "cloudy":
-                    return "wi-cloudy";
+                    weatherimage = "cloudy.jpg";
+                    weathericon = "wi-cloudy";
+                    break;
                 case "partly-cloudy-day":
-                    return "wi-day-sunny-overcast";
+                    weatherimage = "partly-cloudy-day.jpg";
+                    weathericon = "wi-day-sunny-overcast";
+                    break;
                 case "partly-cloudy-night":
-                    return "wi-night-partly-cloudy";
+                    weatherimage = "partly-cloudy-night.jpg";
+                    weathericon = "wi-night-partly-cloudy";
+                    break;
                 default:
-                    return "wi-cloud";
+                    weatherimage = "default.jpg";
+                    weathericon = "wi-cloud";
+                    break;
             }
         }
 
@@ -101,11 +131,14 @@ namespace Frontend_Grupparbete.Controllers
             decimal windSpeed, decimal windBearing,
             string sunriseTime, string sunsetTime, decimal moonPhase)
         {
+            string weatherIcon, weatherImage;
+            GetWeatherIconAndImage(icon, out weatherIcon, out weatherImage);
             var model = new DailyWeather
             {
                 Time = ToDateTime(time),
                 Summary = summary,
-                Icon = GetWeatherIcon(icon),
+                Icon = weatherIcon,
+                WeatherImage = weatherImage,
                 TempMax = temperatureMax,
                 TempMaxTime = ToDateTime(temperatureMaxTime),
                 TempMin = temperatureMin,
@@ -149,11 +182,14 @@ namespace Frontend_Grupparbete.Controllers
             decimal cloudCover, decimal precipIntensity, decimal precipProbability,
             decimal windSpeed, decimal windBearing)
         {
+            string weatherIcon, weatherImage;
+            GetWeatherIconAndImage(icon, out weatherIcon, out weatherImage);
             var model = new CurrentlyWeather
             {
                 Time = ToDateTime(time),
                 Summary = summary,
-                Icon = GetWeatherIcon(icon),
+                Icon = weatherIcon,
+                WeatherImage = weatherImage,
                 Temperature = temperature,
                 ApparentTemperature = apparentTemperature,
                 CloudCover = cloudCover,

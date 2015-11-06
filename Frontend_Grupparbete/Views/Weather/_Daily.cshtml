@@ -1,6 +1,14 @@
 ﻿@using System.Globalization
 @model Frontend_Grupparbete.Models.Weather.DailyWeather
 
+<style>
+    #daily-image-wrapper-@Model.Time.Ticks {
+        background-image: url("../../Content/WeatherImages/@Model.WeatherImage");
+    }
+</style>
+
+
+<div class="image-wrapper" id="daily-image-wrapper-@Model.Time.Ticks"></div>
 <div class="daily-div">
     <div>
         <div data-toggle="tooltip" data-placement="left" title="@Model.Time.ToShortDateString()">

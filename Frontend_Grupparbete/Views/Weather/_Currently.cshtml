@@ -1,5 +1,90 @@
 ﻿@model Frontend_Grupparbete.Models.Weather.CurrentlyWeather
 
-@Model.Time
-<br/>
-@Model.Summary
+
+<style>
+    #currently-image-wrapper {
+        background-image: url("../../Content/WeatherImages/@Model.WeatherImage");
+    }
+</style>
+
+<div class="image-wrapper" id="currently-image-wrapper"></div>
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            @* Day - Date - Time *@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @* Icon *@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @* Summary *@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @* Temperature + apparent temperature *@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @* Cloudcover *@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @* Precipitation (probability) *@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @* Wind + bearing *@
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row" style="margin-top: 0;">
+                <div class="col-md-7">
+                    <h3 data-toggle="tooltip" data-placement="left" title="@Model.Time.ToShortDateString()">@Model.Time.ToString("t")</h3>
+                </div>
+                <div class="col-md-5">
+                    <div class="hourly-2xfont" data-toggle="tooltip" data-placement="left" title="@Model.Summary"><span class="wi @Model.Icon weathericon-hourly"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div data-toggle="tooltip" data-placement="left" title="Actual temperature"><span class="wi wi-thermometer"></span> (actual) <span>@Math.Round(Model.Temperature) &deg;C</span></div>
+
+            <div data-toggle="tooltip" data-placement="left" title="Apparent temperature"><span class="wi wi-thermometer"></span> (app) <span>@Math.Round(Model.ApparentTemperature) &deg;C</span></div>
+
+        </div>
+        <div class="col-md-2">
+            <div class="hourly-2xfont" data-toggle="tooltip" data-placement="left" title="Cloud cover"><span class="wi wi-cloud"></span> <span>@String.Format("{0:P0}", Model.CloudCover)</span></div>
+        </div>
+        <div class="col-md-2">
+
+            @{
+                var precipTooltip = Model.Temperature >= 0 ? "Rain" : "Snow";
+            }
+            <div data-toggle="tooltip" data-placement="left" title="@precipTooltip" style="line-height: 2em;">
+                <span class="wi wi-umbrella hourly-2xfont" style="display: inline-flex; vertical-align: middle;"></span>&nbsp;
+                <span style="display: inline-flex;vertical-align: middle;">@Math.Round(Model.PrecipIntensity, 1) mm/h (@String.Format("{0:P0}", Model.PrecipProbability))</span>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div data-toggle="tooltip" data-placement="left" title="Wind" style="line-height: 2em;">
+                <span class="wi wi-strong-wind hourly-2xfont" style="display: inline-flex; vertical-align: middle;"></span>&nbsp;
+                <span style="display: inline-flex;vertical-align: middle;">@Model.WindSpeed m/s </span>&nbsp;
+                <span class="wi @Model.WindBearingIcon hourly-2xfont" style="display: inline-flex; vertical-align: middle;"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <hr />
+    </div>
+</div>

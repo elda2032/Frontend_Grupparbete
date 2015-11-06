@@ -112,6 +112,17 @@
     <Content Include="Content\Images\placeholder.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\star-field.png" />
+    <Content Include="Content\WeatherImages\sleet.jpg" />
+    <Content Include="Content\WeatherImages\clear-day.jpg" />
+    <Content Include="Content\WeatherImages\clear-night.jpg" />
+    <Content Include="Content\WeatherImages\cloudy.jpg" />
+    <Content Include="Content\WeatherImages\default.jpg" />
+    <Content Include="Content\WeatherImages\fog.jpg" />
+    <Content Include="Content\WeatherImages\partly-cloudy-day.jpg" />
+    <Content Include="Content\WeatherImages\partly-cloudy-night.jpg" />
+    <Content Include="Content\WeatherImages\rain.jpg" />
+    <Content Include="Content\WeatherImages\snow.jpg" />
+    <Content Include="Content\WeatherImages\wind.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Font\weathericons-regular-webfont.svg" />
     <Content Include="Content\weather-icons-wind.css" />
