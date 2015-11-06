@@ -9,14 +9,10 @@
         margin-bottom: 10px;
     }
 
-    .weathericon-hourly {
-        /*font-size: 2em;
-        line-height: 2em;*/
-    }
-
     .daily-div {
         text-align: center;
         padding-top: 10px;
+        position: relative;
     }
 
     #daily hr {
@@ -86,17 +82,35 @@
         right: 10px;
     }
 
-    .background-pos-0 { background-position-x: 0; }
-    .background-pos-68 { background-position-x: -68px; }
-    .background-pos-100 { background-position-x: -100px; }
-    .background-pos-168 { background-position-x: -168px; }
-    .background-pos-300 { background-position-x: -300px; }
-    .background-pos-385 { background-position-x: -385px; }
+    .background-pos-0 {
+        background-position-x: 0;
+    }
+
+    .background-pos-68 {
+        background-position-x: -68px;
+    }
+
+    .background-pos-100 {
+        background-position-x: -100px;
+    }
+
+    .background-pos-168 {
+        background-position-x: -168px;
+    }
+
+    .background-pos-300 {
+        background-position-x: -300px;
+    }
+
+    .background-pos-385 {
+        background-position-x: -385px;
+    }
+
 </style>
 
 <h2>
     Weather
-    <input type="text" class="form-control" id="search-location" style="display: inline-block;" value="Stockholm"/>
+    <input type="text" class="form-control" id="search-location" style="display: inline-block;" value="Stockholm" />
     <input type="button" class="btn btn-default" id="search" value="Search" />
 </h2>
 <br />
@@ -177,7 +191,9 @@
                         },
                         complete: function () {
                             $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
-                            setTooltipAndImagePositions();
+                            setTimeout(function () {
+                                setTooltipAndImagePositions();
+                            }, 100);
                         }
                     });
 
@@ -199,7 +215,7 @@
                 $(this).attr('data-placement', 'bottom');
             });
 
-            $.each($('#daily .image-wrapper'), function() {
+            $.each($('#daily .image-wrapper'), function () {
                 var imgurl = $(this).css('background-image').replace(/.*\s?url\([\'\"]?/, '').replace(/[\'\"]?\).*/, '');
                 var img = imgurl.substr(imgurl.lastIndexOf('/') + 1);
                 $('#' + this.id).removeClass('background-pos-0').removeClass('background-pos-100').removeClass('background-pos-168').removeClass('background-pos-300').removeClass('background-pos-385').removeClass('background-pos-68');
@@ -216,6 +232,7 @@
                     $(this).attr('data-placement', 'left');
                 }
             });
+
             $.each($('#daily .image-wrapper'), function () {
                 var imgurl = $(this).css('background-image').replace(/.*\s?url\([\'\"]?/, '').replace(/[\'\"]?\).*/, '');
                 var img = imgurl.substr(imgurl.lastIndexOf('/') + 1);
@@ -230,6 +247,7 @@
                     $('#' + this.id).addClass('background-pos-168');
                 }
             });
+
         }
     }
 

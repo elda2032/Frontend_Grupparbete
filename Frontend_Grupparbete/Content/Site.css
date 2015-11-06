@@ -4,7 +4,8 @@
 }
 .innerbody {
     background: white;
-    height: 2000px;
+    height: 100%;
+    min-height: 2000px;
     margin-top: 0;
 }
 .navbar {
