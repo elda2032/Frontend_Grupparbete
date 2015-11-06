@@ -141,6 +141,7 @@
     <Content Include="Scripts\jquery.mixitup.js" />
     <Content Include="Scripts\orbitControls.js" />
     <Content Include="Scripts\three.min.js" />
+    <Content Include="Scripts\weather.js" />
     <Content Include="Struktur.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
