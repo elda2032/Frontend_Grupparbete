@@ -26,16 +26,28 @@
             }
         </div>
 
-        <div data-toggle="tooltip" data-placement="bottom" class="tooltip-bottom" title="@Model.Summary"><span class="wi @Model.Icon weathericon"></span></div>
+        <div data-toggle="tooltip" data-placement="bottom" class="tooltip-bottom" title="@Model.Summary">
+            <span class="wi @Model.Icon weathericon"></span>
+        </div>
     </div>
-    <hr />
-    <div data-toggle="tooltip" data-placement="left" title="Max temperature"><span class="wi wi-thermometer"></span> <span>@Math.Round(Model.TempMax) &deg;C (@Model.TempMaxTime.ToString("HH:mm"))</span></div>
-
-    <div data-toggle="tooltip" data-placement="left" title="Min temperature"><span class="wi wi-thermometer-exterior"></span> <span>@Math.Round(Model.TempMin) &deg;C (@Model.TempMinTime.ToString("HH:mm"))</span></div>
 
     <hr />
 
-    <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Cloud cover"><span class="wi wi-cloud"></span> <span>@String.Format("{0:P0}", Model.CloudCover)</span></div>
+    <div data-toggle="tooltip" data-placement="left" title="Max temperature">
+        <span class="wi wi-thermometer"></span>&nbsp;
+        <span>@Math.Round(Model.TempMax) &deg;C (@Model.TempMaxTime.ToString("HH:mm"))</span>
+    </div>
+    <div data-toggle="tooltip" data-placement="left" title="Min temperature">
+        <span class="wi wi-thermometer-exterior"></span>&nbsp;
+        <span>@Math.Round(Model.TempMin) &deg;C (@Model.TempMinTime.ToString("HH:mm"))</span>
+    </div>
+
+    <hr />
+
+    <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Cloud cover">
+        <span class="wi wi-cloud"></span>&nbsp;
+        <span>@String.Format("{0:P0}", Model.CloudCover)</span>
+    </div>
 
     <hr />
 
@@ -57,19 +69,27 @@
         <div>probability @String.Format("{0:P0}", Model.PrecipProbability)</div>
     </div>
 
-    <hr />
+    <hr/>
+
     <div data-toggle="tooltip" data-placement="left" title="Wind">
-        <span class="wi wi-strong-wind"></span>
-        <span> @Model.WindSpeed m/s </span><span class="wi @Model.WindBearingIcon"></span>
+        <span class="wi wi-strong-wind"></span>&nbsp;
+        <span>@Model.WindSpeed m/s</span>&nbsp;
+        <span class="wi @Model.WindBearingIcon"></span>
     </div>
 
     <hr />
     <div>
-        <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunrise"><span class="wi wi-sunrise"></span> @Model.SunriseTime.ToString("HH:mm")</div>
+        <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunrise">
+            <span class="wi wi-sunrise"></span>&nbsp;@Model.SunriseTime.ToString("HH:mm")
+        </div>
 
-        <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunset"><span class="wi wi-sunset"></span> @Model.SunsetTime.ToString("HH:mm")</div>
+        <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Sunset">
+            <span class="wi wi-sunset"></span>&nbsp;@Model.SunsetTime.ToString("HH:mm")
+        </div>
 
-        <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Moon phase"><span class="wi @Model.MoonIcon"></span></div>
+        <div class="font-1-5-em" data-toggle="tooltip" data-placement="left" title="Moon phase">
+            <span class="wi @Model.MoonIcon"></span>
+        </div>
     </div>
     <hr />
 </div>
