@@ -1,0 +1,219 @@
+﻿@model IEnumerable<Frontend_Grupparbete.Models.Weather.GraphWeather>
+
+<style>
+    /* Resets */
+    .graph-container,
+    .graph-container div,
+    .graph-container a,
+    .graph-container span {
+        margin: 0;
+        padding: 0;
+    }
+    /* Gradinet and Rounded Corners */
+    .graph-container, #tooltip {
+        background: #ffffff;
+        background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f9f9f9));
+        background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+        background: -o-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+        background: -ms-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+        background: linear-gradient(to bottom, #ffffff 0%,#f9f9f9 100%);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+    /* Graph Container */
+    .graph-container {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        padding: 20px;
+        -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+        -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+        box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+    }
+
+        .graph-container > div {
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            top: 0;
+            left: 0;
+        }
+
+        /* Clear Floats */
+        .graph-container:before, .graph-container:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+    .tickLabel {
+        font-weight: bold;
+        font-size: 12px;
+        color: #666;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .xaxisLabel {
+        top: 10px !important;
+    }
+    .yaxisLabel {
+        left: -10px !important;
+    }
+    .y2axisLabel {
+        left: 10px !important;
+    }
+
+    @@media (max-width: 768px) {
+        .tickLabel {
+            font-weight: lighter;
+            font-size: 10px;
+        }
+
+        .flot-x-axis .tickLabel {
+            display: none;
+        }
+
+        .axisLabels {
+            font-size: 12px;
+        }
+    }
+
+    #tooltip {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 20px;
+        color: #646464;
+        position: absolute;
+        display: none;
+        padding: 5px 10px;
+        border: 1px solid #e1e1e1;
+    }
+</style>
+
+<div id="graph-wrapper">
+    <div class="graph-container">
+        <div id="graph-lines"></div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/flot/jquery.flot.min.js"></script>
+<script src="~/Scripts/flot/jquery.flot.time.min.js"></script>
+<script src="~/Scripts/flot/jquery.flot.resize.min.js"></script>
+<script src="~/Scripts/flot/curvedLines.js"></script>
+<script src="~/Scripts/flot/jquery.flot.axislabels.js"></script>
+
+<script>
+
+    var temperatureData = [];
+    var apparentTempData = [];
+    var precipIntensityData = [];
+
+    @foreach (var m in Model)
+        {
+            @:temperatureData.push([@(m.Time * 1000), parseFloat(@m.Temperature.ToString().Replace(",", "."))]);
+                @:apparentTempData.push([@(m.Time * 1000), parseFloat(@m.ApparentTemperature.ToString().Replace(",", "."))]);
+                @:precipIntensityData.push([@(m.Time * 1000), parseFloat(@m.PrecipIntensity.ToString().Replace(",", "."))])
+            }
+
+    $(function () {
+        var graphData = [
+            {
+                data: precipIntensityData,
+                color: '#C9DFED',
+                label: "Precipitation (mm/h)",
+                yaxis: 2,
+                bars: {
+                    show: true,
+                    align: "center",
+                    lineWidth: 1,
+                    barWidth: 1 * 3600 * 1000
+                }
+            }, {
+                data: apparentTempData,
+                color: '#C44F82',
+                label: "Apparent temperature (&deg;C)",
+                yaxis: 1,
+                lines: {
+                    show: true
+                }
+            }, {
+                data: temperatureData,
+                color: '#71c73e',
+                label: "Temperature (&deg;C)",
+                yaxis: 1,
+                lines: {
+                    show: true
+                }
+            }
+        ];
+
+        $.plot($('#graph-lines'), graphData, {
+            series: {
+                shadowSize: 0,
+            },
+            grid: {
+                color: '#646464',
+                borderColor: 'transparent',
+                borderWidth: 20,
+                hoverable: true
+            },
+            axisLabels: {
+                show: true
+            },
+            xaxis: {
+                tickColor: 'transparent',
+                tickSize: [4, "hour"],
+                mode: "time",
+                timeformat: "%H:%M",
+                axisLabel: "Time"
+            },
+            yaxes: [
+                {
+                    position: "left",
+                    tickSize: 1,
+                    axisLabel: "Temperature (&deg;C)"
+                }, {
+                    position: "right",
+                    tickSize: 1,
+                    min: 0,
+                    axisLabel: "Precipitation (mm/h)"
+                }
+            ],
+            legend: {
+                sorted: "reverse"
+            }
+        });
+
+        $('#graph-lines').bind('plothover', function (event, pos, item) {
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+                    $('#tooltip').remove();
+                    var x = (new Date(item.datapoint[0])).getHours(),
+                        y = item.datapoint[1];
+                    if (item.seriesIndex === 0) {
+                        showTooltip(item.pageX, item.pageY, y.toFixed(2) + ' mm/h at ' + x + '.00');
+                    } else {
+                        showTooltip(item.pageX, item.pageY, y.toFixed(1) + ' &deg;C at ' + x + '.00');
+                    }
+                }
+            } else {
+                $('#tooltip').remove();
+                previousPoint = null;
+            }
+        });
+    });
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css({
+            top: y - 16,
+            left: x + 20
+        }).appendTo('body').fadeIn();
+    }
+
+    var previousPoint = null;
+
+</script>

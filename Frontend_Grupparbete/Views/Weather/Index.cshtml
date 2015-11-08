@@ -100,13 +100,15 @@
     }
 </style>
 
-<h2>
-    Weather
-    <input type="text" class="form-control" id="search-location" style="display: inline-block;" placeholder="Search by city" />
-    <input type="button" class="btn btn-default" id="search" value="Search" />
-</h2>
+<h2>Weather</h2>
 <br />
-<div><span class="h3">Location</span>&nbsp;<span id="location"></span></div>
+<div>
+    <h3 style="display: inline-flex;vertical-align: middle; margin: 0;">Location</h3>&nbsp;
+    <div class="form-inline" style="display: inline-flex;vertical-align: middle;">
+        <input type="text" class="form-control" id="search-location" placeholder="Search by city" style="margin-right: 5px;" />
+        <input type="button" class="btn btn-default" id="search" value="Search" />
+    </div>
+</div>
 <div><span class="h4">Timezone</span>&nbsp;<span id="timezone"></span></div>
 <hr />
 
@@ -117,6 +119,7 @@
         <li role="presentation" class="active"><a href="#now" aria-controls="now" role="tab" data-toggle="tab">Now</a></li>
         <li role="presentation"><a href="#daily" aria-controls="daily" role="tab" data-toggle="tab">Daily</a></li>
         <li role="presentation"><a href="#hourly" aria-controls="hourly" role="tab" data-toggle="tab">Hourly</a></li>
+        <li role="presentation"><a href="#graph" aria-controls="graph" role="tab" data-toggle="tab">Graphs</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -146,6 +149,9 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="hourly">
             <div class="col-md-offset-1 col-md-10" id="hourly-content"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="graph">
+            <div id="graph-content"></div>
         </div>
     </div>
 
@@ -187,8 +193,8 @@
 
         var storedWeather = getWeatherFromLocalStorage(latitude, longitude);
         if (storedWeather) {
+            console.log(storedWeather);
             updateWeather(storedWeather);
-            $('#location').html($('#search-location').val());
             setTimeout(function () {
                 setTooltipAndImagePositions();
             }, 100);
@@ -199,7 +205,6 @@
                     addWeatherToLocalStorage(latitude, longitude, data);
                     console.log(data);
                     updateWeather(data);
-                    $('#location').html($('#search-location').val());
                 },
                 function() {
                     setTimeout(function() {
@@ -272,6 +277,11 @@
         });
         updateHourlyWeather(json, '@Url.Action("Hourly", "Weather")', function(data, index) {
             $('#hourly-' + index).html(data);
+        });
+
+        // GRAPH
+        updateGraphsWeather(json, '@Url.Action("Graph", "Weather")', function(data) {
+            $('#graph-content').html(data);
         });
     }
 

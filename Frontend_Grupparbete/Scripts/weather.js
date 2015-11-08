@@ -177,3 +177,35 @@ function updateHourlyWeather(json, url, onSuccess) {
         });
     });
 }
+
+// -----------------------------------------------------------------------------------
+// UPDATE WEATHER-GRAPHS
+function updateGraphsWeather(json, url, onSuccess) {
+    var temp = [];
+
+    $.each(json.hourly.data, function(i, item) {
+
+        temp.push({
+            Time: item.time,
+            Temperature: item.temperature,
+            ApparentTemperature: item.apparentTemperature,
+            PrecipIntensity: item.precipIntensity
+        });
+
+    });
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: JSON.stringify({model : temp}),
+        datatype: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            onSuccess(data);
+        },
+        error: function (request, status, err) {
+            //alert(status);
+            //alert(err);
+        }
+    });
+}

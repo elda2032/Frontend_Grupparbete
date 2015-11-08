@@ -200,5 +200,11 @@ namespace Frontend_Grupparbete.Controllers
             };
             return PartialView("_Currently", model);
         }
+
+        [HttpPost]
+        public ActionResult Graph(IList<GraphWeather> model)
+        {
+            return PartialView("_Graph", model.OrderBy(m => m.Time));
+        }
     }
 }
