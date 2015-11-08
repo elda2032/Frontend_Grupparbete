@@ -19,11 +19,7 @@
         margin-bottom: 10px;
         margin-top: 10px;
     }
-
-    .center-day-and-icon {
-        text-align: center;
-    }
-
+    
     .col-split:first-of-type {
         padding-right: 0;
     }
@@ -32,7 +28,7 @@
         padding-left: 0;
     }
 
-    .hourly-2xfont {
+    .font-2-em {
         font-size: 2em;
     }
 
@@ -40,6 +36,8 @@
         font-size: 1.5em;
     }
 
+    #now .row:first-child,
+    #daily .row:first-child,
     #hourly-content .row:first-child {
         margin-top: 20px;
     }
@@ -51,7 +49,6 @@
     @@media (max-width: 768px) {
         #daily .image-wrapper {
             border-top: 2px gray solid;
-            /*background-position-x: 0 !important;*/
         }
 
         .daily-div {
@@ -67,11 +64,7 @@
             padding-left: 0;
         }
     }
-
-    #now .row:first-child {
-        margin-top: 20px;
-    }
-
+    
     .image-wrapper {
         height: 100%;
         background-repeat: no-repeat;
@@ -105,12 +98,11 @@
     .background-pos-385 {
         background-position-x: -385px;
     }
-
 </style>
 
 <h2>
     Weather
-    <input type="text" class="form-control" id="search-location" style="display: inline-block;" value="Stockholm" />
+    <input type="text" class="form-control" id="search-location" style="display: inline-block;" placeholder="Search by city" />
     <input type="button" class="btn btn-default" id="search" value="Search" />
 </h2>
 <br />
@@ -122,22 +114,22 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation"><a href="#now" aria-controls="now" role="tab" data-toggle="tab">Now</a></li>
-        <li role="presentation" class="active"><a href="#daily" aria-controls="daily" role="tab" data-toggle="tab">Daily</a></li>
+        <li role="presentation" class="active"><a href="#now" aria-controls="now" role="tab" data-toggle="tab">Now</a></li>
+        <li role="presentation"><a href="#daily" aria-controls="daily" role="tab" data-toggle="tab">Daily</a></li>
         <li role="presentation"><a href="#hourly" aria-controls="hourly" role="tab" data-toggle="tab">Hourly</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane" id="now">
+        <div role="tabpanel" class="tab-pane active" id="now">
             <div class="row">
-                <div class="col-md-offset-3 col-md-6" id="currently">
+                <div class="col-md-offset-4 col-md-4" id="currently">
 
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane active" id="daily">
-            <div class="row" style="margin-top: 20px;">
+        <div role="tabpanel" class="tab-pane" id="daily">
+            <div class="row">
                 <div class="col-md-6 col-split">
                     <div class="col-md-3"><div id="daily-0"></div></div>
                     <div class="col-md-3"><div id="daily-1"></div></div>
@@ -161,53 +153,61 @@
 
 
 <script type="text/javascript" src="https://maps.google.com/maps/api/js"></script>
+<script src="~/Scripts/weather.js"></script>
 
 <script>
     $(function () {
 
+        getGeoLocation();
+
         $('#search').click(function () {
-
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ 'address': $('#search-location').val() }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    console.log("Latitude: " + results[0].geometry.location.lat());
-                    console.log("Longitude: " + results[0].geometry.location.lng());
-                    console.log(results);
-
-                    var latitude = results[0].geometry.location.lat();
-                    var longitude = results[0].geometry.location.lng();
-
-                    $.ajax({
-                        url: 'https://api.forecast.io/forecast/44c7cdd00e0f82699006ed275eb2b6cf/' + latitude + ',' + longitude + '?units=si',
-                        type: 'GET',
-                        dataType: 'jsonp',
-                        success: function (data, textStatus, xhr) {
-                            console.log(data);
-                            updateWeather(data);
-                            $('#location').html($('#search-location').val());
-                        },
-                        error: function (xhr, textStatus, errorThrown) {
-                            console.log('Error in Operation');
-                        },
-                        complete: function () {
-                            $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
-                            setTimeout(function () {
-                                setTooltipAndImagePositions();
-                            }, 100);
-                        }
-                    });
-
-                } else {
-                    alert('Invalid address: ' + $('#search-location').val());
-                }
-            });
+            getCoordinatesGeocoder($('#search-location').val(), getWeather);
         });
 
         $(window).resize(function () {
             setTooltipAndImagePositions();
         });
-
     });
+
+    // GEOLOCATION
+    function getGeoLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+    function showPosition(position) {
+        getLocationGeocoder(position.coords.latitude, position.coords.longitude, function (place) { $('#search-location').val(place); });
+        getWeather(position.coords.latitude, position.coords.longitude);
+    }
+
+    // WEATHER-API
+    function getWeather(latitude, longitude) {
+
+        var storedWeather = getWeatherFromLocalStorage(latitude, longitude);
+        if (storedWeather) {
+            updateWeather(storedWeather);
+            $('#location').html($('#search-location').val());
+            setTimeout(function () {
+                setTooltipAndImagePositions();
+            }, 100);
+
+        } else {
+            getWeatherFromApi(latitude, longitude,
+                function(data) {
+                    addWeatherToLocalStorage(latitude, longitude, data);
+                    console.log(data);
+                    updateWeather(data);
+                    $('#location').html($('#search-location').val());
+                },
+                function() {
+                    setTimeout(function() {
+                        setTooltipAndImagePositions();
+                    }, 100);
+                });
+        }
+    }
 
     function setTooltipAndImagePositions() {
         if ($(window).width() < 768) {
@@ -247,117 +247,32 @@
                     $('#' + this.id).addClass('background-pos-168');
                 }
             });
-
         }
+        $('body').tooltip('destroy');
+        $('body').tooltip({ selector: '[data-toggle="tooltip"]', container: 'body' });
     }
 
     function updateWeather(json) {
 
-        var currently = json.currently;
-        var daily = json.daily;
-        var hourly = json.hourly;
-        var timezone = json.timezone;
-
-        $('#timezone').text(timezone);
+        $('#timezone').text(json.timezone);
 
         // CURRENTLY
-        var jsonNow = {
-            time: currently.time,
-            summary: currently.summary,
-            icon: currently.icon,
-            temperature: currently.temperature,
-            apparentTemperature: currently.apparentTemperature,
-            cloudCover: currently.cloudCover,
-            precipIntensity: currently.precipIntensity,
-            precipProbability: currently.precipProbability,
-            windSpeed: currently.windSpeed,
-            windBearing: currently.windBearing
-        };
-        $.ajax({
-            url: '@Url.Action("Currently", "Weather")',
-            type: 'get',
-            data: jsonNow,
-            datatype: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $('#currently').html(data);
-            },
-            error: function (request, status, err) {
-                //alert(status);
-                //alert(err);
-            }
+        updateCurrentWeather(json, '@Url.Action("Currently", "Weather")', function (data) {
+            $('#currently').html(data);
         });
 
         // DAILY
-        $.each(daily.data, function (i, item) {
-
-            var jsonDaily = {
-                time: item.time,
-                summary: item.summary,
-                icon: item.icon,
-                temperatureMax: item.temperatureMax,
-                temperatureMaxTime: item.temperatureMaxTime,
-                temperatureMin: item.temperatureMin,
-                temperatureMinTime: item.temperatureMinTime,
-                cloudCover: item.cloudCover,
-                precipIntensity: item.precipIntensity,
-                precipIntensityMax: item.precipIntensityMax,
-                precipProbability: item.precipProbability,
-                windSpeed: item.windSpeed,
-                windBearing: item.windBearing,
-                sunriseTime: item.sunriseTime,
-                sunsetTime: item.sunsetTime,
-                moonPhase: item.moonPhase
-            };
-            $.ajax({
-                url: '@Url.Action("Daily", "Weather")',
-                type: 'get',
-                data: jsonDaily,
-                datatype: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    $('#daily-' + i).html(data);
-                },
-                error: function (request, status, err) {
-                    //alert(status);
-                    //alert(err);
-                }
-            });
+        updateDailyWeather(json, '@Url.Action("Daily", "Weather")', function(data, index) {
+            $('#daily-' + index).html(data);
         });
-
 
         // HOURLY
-        $.each(hourly.data, function (i, item) {
+        $.each(json.hourly.data, function(i, item) {
             $('#hourly-content').append('<div id="hourly-' + i + '"></div>');
-            var jsonHourly = {
-                time: item.time,
-                summary: item.summary,
-                icon: item.icon,
-                temperature: item.temperature,
-                apparentTemperature: item.apparentTemperature,
-                cloudCover: item.cloudCover,
-                precipIntensity: item.precipIntensity,
-                precipProbability: item.precipProbability,
-                windSpeed: item.windSpeed,
-                windBearing: item.windBearing
-            };
-            $.ajax({
-                url: '@Url.Action("Hourly", "Weather")',
-                type: 'get',
-                data: jsonHourly,
-                datatype: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    $('#hourly-' + i).html(data);
-                },
-                error: function (request, status, err) {
-                    //alert(status);
-                    //alert(err);
-                }
-            });
         });
-
-
+        updateHourlyWeather(json, '@Url.Action("Hourly", "Weather")', function(data, index) {
+            $('#hourly-' + index).html(data);
+        });
     }
 
 </script>
