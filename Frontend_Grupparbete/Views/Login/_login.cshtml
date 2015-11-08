@@ -1,17 +1,17 @@
-﻿@model string
+﻿@model Frontend_Grupparbete.Models.User
 
 
 <ul class="nav navbar-nav navbar-right">
 
 
 
-    @if (string.IsNullOrEmpty(Model))
+    @if (Model == null)
     {
         <li>@Html.ActionLink("Login", "Index", "Login")</li>
     }
     else
     {
-        <li>@Html.ActionLink(Model, "Manage", "Login", new { email = Model }, null)</li>
+        <li>@Html.ActionLink(Model.Email, "Manage", "Login", new { id = Model.Id }, null)</li>
         <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
     }
 

@@ -1,0 +1,44 @@
+﻿<div class="container">
+
+
+    <form class="form-horizontal" role="form" ng-submit="submitForm()">
+
+        <fieldset>
+            <legend>Basic information</legend>
+            <div class="form-group">
+                <label for="firstName" class="control-label col-sm-3">First Name</label>
+                <input id="firstName" class="form-control col-sm-9" type="text" Name="FirstName" ng-model="user.FirstName" />
+            </div>
+
+            <div class="form-group">
+                <label for="lastName" class="control-label col-sm-3">Last Name</label>
+                <input id="lastName" class="form-control" type="text" Name="LastName" ng-model="user.LastName" />
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="control-label col-sm-3">Password</label>
+                <input id="password" class="form-control col-sm-9" type="text" Name="Password"  ng-model="user.Password"/>
+            </div>
+
+        </fieldset>
+        <fieldset>
+            <legend>Profession Information</legend>
+            <div class="form-group">
+                <label for="profession" class="control-label col-sm-3">Profession</label>
+                <select id="profession" class="form-control col-sm-9" Name="Profession"  ng-model="user.Profession" ng-options="prof for prof in professions">
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="income" class="control-label col-sm-3">Income</label>
+                <input id="income" class="form-control col-sm-9" type="text" Name="Salary" ng-model="user.Salary"/>
+            </div>
+        </fieldset>
+
+        <div class="col-sm-offset-3 col-sm-9">
+            <input type="submit" class="btn btn-primary" value="Save"/>
+        </div>
+        
+    </form>
+</div>

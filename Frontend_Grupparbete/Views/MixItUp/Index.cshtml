@@ -2,13 +2,11 @@
 @{
     ViewBag.Title = "MixItUp";
 }
-<div>
-
-</div>
-
-<style>
-
-</style>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/app/UserFormApp.js"></script>
+<script src="~/app/UserForm/userController.js"></script>
+<script src="~/app/UserForm/userDirective.js"></script>
+<script src="~/app/UserForm/userService.js"></script>
 
 
 <div id="Container">
@@ -23,7 +21,7 @@
             <h3>Sorting</h3>
 
 
-            <select id="SortSelect" class="form input-sm" style="width: 100%">
+            <select id="SortSelect" class="form-controll input-sm" style="width:100%">
                 <option value="name">First Name</option>
                 <option value="lastname">Last Name</option>
                 <option value="email">Email</option>
@@ -43,7 +41,7 @@
         <div id="filtering">
             <h3>Filters</h3>
 
-            @Html.DropDownList("Profession", Model.Professions, new{Id = "FilterList", @class="form input-sm", style="width:100%" })
+            @Html.DropDownList("Profession", Model.Professions, new{Id = "FilterList", @class="form-controll input-sm", style="width:100%" })
         </div>
 
     </div>
@@ -53,7 +51,7 @@
         <div class="col-lg-6 col-sm-12 col-md-8 itemContainer">
             @foreach (var p in Model.Users)
             {
-                <div class="mix modal-content @p.Profession" onclick="manage('@p.Email')" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
+                <div class="mix modal-content @p.Profession" onclick="manage('@p.Id')" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
                     <div class="iconContainer">
                             <img class="icon" src="/content/images/@(p.Profession).jpg" alt="profession icon" onerror="this.src = '/content/images/placeholder.jpg';"/>
                         </div>
@@ -95,17 +93,15 @@
         });
     });
 
-    function manage(user) {
-        window.location.href = "@(Url.Action("Manage","Login"))?email=" + user;
+    function manage(id) {
+        window.location.href = "@(Url.Action("Manage","Login"))?id=" + id;
     }
-
     function setDirection(dir) {
         $('.btn').removeClass("active");
         $('#'+dir).addClass('active');
         sort();
 
     }
-
     function sort() {
         var dir = "desc";
         if ($('#asc').hasClass('active')) {

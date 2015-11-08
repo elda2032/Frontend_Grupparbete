@@ -14,7 +14,12 @@ namespace Frontend_Grupparbete.Controllers
     {
         public ActionResult Index()
         {
-            Session["user"] = "Stefanbjerkell@gmail.com";
+
+            // Temporary Login ===============//
+            var user = Database.Users.First();//
+            Session["user"] = user.Id;        //
+            // ===============================//
+
             return View();
 
         }
@@ -24,15 +29,24 @@ namespace Frontend_Grupparbete.Controllers
             return this.View();
         }
 
-        public ActionResult Manage(string email)
+        public ActionResult Manage(int id)
         {
-            var user = this.Database.Users.FirstOrDefault(u => u.Email == email);
+            var user = this.Database.Users.FirstOrDefault(u => u.Id == id);
             return this.View(user);
         }
 
         public PartialViewResult LoginPartial()
         {
-            return this.PartialView("_login", Session["user"]);
+            int id;
+
+            if (Session["user"] == null)
+            {
+                return this.PartialView("_login", null);
+            }
+
+            int.TryParse(Session["user"].ToString(), out id);
+            var user = Database.Users.FirstOrDefault(u => u.Id == id);
+            return PartialView("_login", user );
         }
 
         [HttpPost]
