@@ -108,16 +108,12 @@
     <Content Include="app\UserForm\userTemplate.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\earthmap1k.jpg" />
-    <Content Include="Content\earthspec1k.jpg" />
-    <Content Include="Content\elev_bump_16ka.jpg" />
     <Content Include="Content\Images\placeholder.jpg" />
     <Content Include="Content\Images\McDonalds.jpg" />
     <Content Include="Content\Images\Blizzard.jpg" />
     <Content Include="Content\Images\Apple.jpg" />
     <Content Include="Content\Images\questionmark.jpg" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\star-field.png" />
     <Content Include="Content\WeatherImages\sleet.jpg" />
     <Content Include="Content\WeatherImages\clear-day.jpg" />
     <Content Include="Content\WeatherImages\clear-night.jpg" />
@@ -193,7 +189,6 @@
     <Content Include="Font\weathericons-regular-webfont.ttf" />
     <Content Include="Font\weathericons-regular-webfont.woff" />
     <Content Include="Font\weathericons-regular-webfont.woff2" />
-    <Content Include="Views\TheDataTable\Index.cshtml" />
     <Content Include="Views\Login\_login.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Login\Manage.cshtml" />

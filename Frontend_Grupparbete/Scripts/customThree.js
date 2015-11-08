@@ -14,7 +14,6 @@ var renderer = new THREE.WebGLRenderer({ antialiasing: true });
 
 // Renderer
 renderer.setSize(WIDTH, HEIGHT);
-//document.body.appendChild(renderer.domElement);
 container.appendChild(renderer.domElement);
 
 // Custom materials
