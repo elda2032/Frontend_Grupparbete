@@ -1,5 +1,5 @@
-﻿userFormApp.controller('homeController',
-    function homeController($scope, $modal, dataService) {
+﻿userFormApp.controller('homeController', ["$scope", "dataService","$modal",
+    function homeController($scope, dataService, $modal) {
 
         $scope.showCreateUserForm = function () {
             $modal.open({
@@ -18,4 +18,4 @@
         }
 
 
-    });
+    }]);
