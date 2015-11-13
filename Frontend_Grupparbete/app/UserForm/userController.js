@@ -34,7 +34,6 @@
         $scope.submitForm = function () {
             dataService.addOrUpdateUser($scope.editableUser).then(
                 function (results) {
-                    alert("success");
                     $scope.user = angular.copy($scope.editableUser);
                     $scope.SucessMessage = results.statusText;
                 },
