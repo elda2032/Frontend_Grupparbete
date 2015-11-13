@@ -212,7 +212,7 @@
     <Content Include="Views\Three\Index.cshtml" />
     <Content Include="Views\Weather\_Currently.cshtml" />
     <Content Include="Views\Weather\_Graph.cshtml" />
-    <Content Include="Scripts\jquery.runner" />
+    <Content Include="Scripts\jquery.runner.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
