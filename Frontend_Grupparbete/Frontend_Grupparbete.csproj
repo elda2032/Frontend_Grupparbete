@@ -136,6 +136,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CoolClock.js" />
     <Content Include="Scripts\flot\curvedLines.js" />
     <Content Include="Scripts\customThree.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -146,6 +147,7 @@
     <Content Include="Scripts\flot\jquery.flot.time.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\jquery.mixitup.js" />
+    <Content Include="Scripts\moreskins.js" />
     <Content Include="Scripts\orbitControls.js" />
     <Content Include="Scripts\three.min.js" />
     <Content Include="Scripts\tween.js" />
@@ -204,6 +206,7 @@
     <Content Include="Views\Three\Index.cshtml" />
     <Content Include="Views\Weather\_Currently.cshtml" />
     <Content Include="Views\Weather\_Graph.cshtml" />
+    <Content Include="Scripts\jquery.runner" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
