@@ -16,8 +16,6 @@
             <h3>CoolClock machine</h3>
         <canvas id="c3" class="CoolClock:machine:150"></canvas></div>
     </div>
-
-    @*<p><a class="btn btn-lg btn-success" href="#" role="button">Local time</a></p>*@
 </div>
 
 
@@ -58,14 +56,16 @@
 
             </div>
         </div>
-        @*<div class="col-md-4">
-            <div class="jumbotron">
+        <div class="col-md-4">
+            <div style="padding-bottom:125px" class="jumbotron">
                 <span id="runner"></span>
-                <div id="myButton" class="btn btn-sm btn-primary" style="margin: 2px; width: 100%" onclick="setDirection('desc')">Runner</div>
-
+                <div id="myButton" class="btn btn-sm btn-primary active" style=" margin:2px; width:100%">Start Runner</div>
+                <div id="myStopButton" class="btn btn-sm btn-primary" style="margin: 2px; width: 100%">Stop Runner</div>
+                <div id="myResetButton" class="btn btn-sm btn-success" style="margin: 2px; width: 100%">Reset Runner</div>
+               
             </div>
         </div>
-    </div>*@
+    </div>
 
 
 @*<div>
@@ -94,3 +94,19 @@
     setInterval(update, 1000);
     </script>
 
+     <script type="text/javascript">
+
+         $('#runner').runner();
+
+         $('#myButton').click(function () {
+             $('#runner').runner('start');
+         });
+         $('#myStopButton').click(function () {
+             $('#runner').runner('stop');
+         });
+         $('#myResetButton').click(function () {
+             $('#runner').runner('reset');
+         });
+
+
+     </script>

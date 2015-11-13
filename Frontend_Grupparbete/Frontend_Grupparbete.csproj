@@ -151,6 +151,7 @@
     <Content Include="Scripts\flot\jquery.flot.min.js" />
     <Content Include="Scripts\flot\jquery.flot.resize.min.js" />
     <Content Include="Scripts\flot\jquery.flot.time.min.js" />
+    <Content Include="Scripts\jQuery.runner.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\jquery.mixitup.js" />
     <Content Include="Scripts\moreskins.js" />
@@ -212,7 +213,6 @@
     <Content Include="Views\Three\Index.cshtml" />
     <Content Include="Views\Weather\_Currently.cshtml" />
     <Content Include="Views\Weather\_Graph.cshtml" />
-    <Content Include="Scripts\jquery.runner.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
