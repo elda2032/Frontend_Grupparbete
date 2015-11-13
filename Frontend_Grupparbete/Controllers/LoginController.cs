@@ -76,7 +76,7 @@ namespace Frontend_Grupparbete.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(200,"ModelState not Valid");
+                return new HttpStatusCodeResult(400,"ModelState not Valid");
             }
 
             Database.Users.AddOrUpdate(user);

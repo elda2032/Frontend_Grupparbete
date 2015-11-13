@@ -38,7 +38,7 @@
                     $scope.SucessMessage = results.statusText;
                 },
                 function (results) {
-                    $scope.ErrorMessage(results.statusText);
+                    $scope.ErrorMessage = results.statusText;
                 });
         }
 
