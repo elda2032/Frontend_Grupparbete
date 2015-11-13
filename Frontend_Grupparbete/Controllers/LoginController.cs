@@ -49,6 +49,18 @@ namespace Frontend_Grupparbete.Controllers
             return PartialView("_login", user );
         }
 
+        public JsonResult GetUser(int id)
+        {
+            var user  = this.Json(Database.Users.FirstOrDefault(u => u.Id == id), JsonRequestBehavior.AllowGet);
+            return user;
+        }
+
+        public JsonResult GetUsers()
+        {
+
+            return this.Json(Database.Users, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public void RemoveUser(string userEmail)
         {
@@ -60,15 +72,17 @@ namespace Frontend_Grupparbete.Controllers
         }
 
         [HttpPost]
-        public void UpdateUser(User user)
+        public ActionResult UpdateUser(User user)
         {
             if (!ModelState.IsValid)
             {
-                return;
+                return new HttpStatusCodeResult(400,"ModelState not Valid");
             }
 
             Database.Users.AddOrUpdate(user);
             Database.SaveChanges();
+
+            return new HttpStatusCodeResult(201, "User updated");
         }
 
         public void LoginUser(string userEmail, string password)

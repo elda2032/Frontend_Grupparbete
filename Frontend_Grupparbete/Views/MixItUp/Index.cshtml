@@ -2,14 +2,9 @@
 @{
     ViewBag.Title = "MixItUp";
 }
-<script src="~/Scripts/angular.min.js"></script>
-<script src="~/app/UserFormApp.js"></script>
-<script src="~/app/UserForm/userController.js"></script>
-<script src="~/app/UserForm/userDirective.js"></script>
-<script src="~/app/UserForm/userService.js"></script>
 
 
-<div id="Container">
+<div id="Container" ng-controller="homeController">
     <h2>User Database with MixItUp!</h2>
     <p>
         Here you can play around with all the users.<br />
@@ -25,7 +20,7 @@
                 <option value="name">First Name</option>
                 <option value="lastname">Last Name</option>
                 <option value="email">Email</option>
-                <option value="salary">Income</option>
+                <option value="income">Income</option>
                 <option value="profession">Profession</option>
             </select>
 
@@ -51,7 +46,7 @@
         <div class="col-lg-6 col-sm-12 col-md-8 itemContainer">
             @foreach (var p in Model.Users)
             {
-                <div class="mix modal-content @p.Profession" onclick="manage('@p.Id')" data-salary="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
+                <div class="mix modal-content @p.Profession" ng-click="showUpdateUserForm(@p.Id)" data-income="@p.Income" data-name="@p.FirstName" data-email="@p.Email" data-lastname="@p.LastName" data-profession="@p.Profession">
                     <div class="iconContainer">
                             <img class="icon" src="/content/images/@(p.Profession).jpg" alt="profession icon" onerror="this.src = '/content/images/placeholder.jpg';"/>
                         </div>

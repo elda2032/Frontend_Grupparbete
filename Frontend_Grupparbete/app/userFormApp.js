@@ -1,1 +1,1 @@
-﻿var userFormApp = angular.module('userFormApp', []);
+﻿var userFormApp = angular.module('userFormApp', ['ui.bootstrap']);

@@ -1,23 +1,10 @@
 ﻿@model Frontend_Grupparbete.Models.User
 
+<h2>Manage : @(Model != null ?  Model.Email : "Could not find user!")  </h2>
 
-<script src="~/Scripts/angular.min.js"></script>
-<script src="~/app/UserFormApp.js"></script>
-<script src="~/app/UserForm/userController.js"></script>
-<script src="~/app/UserForm/userDirective.js"></script>
-<script src="~/app/UserForm/userService.js"></script>
-
-
-<h2>Manage : @(Model != null ?  Model.Email : "COuld not find user!")  </h2>
-
-<div ng-app="userFormApp">
-
-    <div ng-controller="userController">
-        <user-form />
-    </div>
+<div>
 
 </div>
-
 
 
 

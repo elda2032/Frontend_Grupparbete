@@ -9,16 +9,25 @@
 
     <link href="~/Content/weather-icons.min.css" rel="stylesheet" />
     <link href="~/Content/weather-icons-wind.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet"/>
+    <link href="~/Content/Site.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <script type="text/javascript" src="~/Scripts/coolclock.js"></script>
     <script type="text/javascript" src="~/Scripts/moreskins.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="~/app/UserFormApp.js"></script>
+    <script src="~/app/homeController.js"></script>
+    <script src="~/app/UserForm/userController.js"></script>
+    <script src="~/app/UserForm/userDirective.js"></script>
+    <script src="~/app/dataService.js"></script>
+
 
 </head>
-<body>
+<body ng-app="userFormApp">
 
     <nav class="navbar navbar-default main-navbar">
         <div class="container">
@@ -39,15 +48,15 @@
                     <li>@Html.ActionLink("DataTable", "Index", "DataTable")</li>
                     <li>@Html.ActionLink("Weather", "Index", "Weather")</li>
                     <li>@Html.ActionLink("Clock", "Index", "Clock")</li>
-                   
+
                 </ul>
-                @Html.Action("LoginPartial","Login")
+                @Html.Action("LoginPartial", "Login")
             </div>
         </div>
     </nav>
-<div class="container innerbody">
-    @RenderBody()
-</div>
-    
+    <div class="container innerbody">
+        @RenderBody()
+    </div>
+
 </body>
 </html>
