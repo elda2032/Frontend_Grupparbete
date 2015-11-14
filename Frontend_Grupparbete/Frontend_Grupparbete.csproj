@@ -102,6 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\homeController.js" />
+    <Content Include="app\LoginForm\loginController.js" />
+    <Content Include="app\LoginForm\loginTemplate2.html" />
     <Content Include="app\userFormApp.js" />
     <Content Include="app\UserForm\userController.js" />
     <Content Include="app\UserForm\userDirective.js" />

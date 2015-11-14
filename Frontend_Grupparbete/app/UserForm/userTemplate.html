@@ -6,7 +6,7 @@
 
 <div class="modal-body">
     <div ng-show="ErrorMessage" class="alert alert-warning"> {{ ErrorMessage }} </div>
-    <div ng-show="SucessMessage" class="alert alert-success"> {{ SucessMessage}} </div>
+    <div ng-show="SuccessMessage" class="alert alert-success"> {{ SuccessMessage}} </div>
     <form class="form-horizontal" role="form">
         <fieldset>
             <legend>Basic information</legend>
@@ -51,6 +51,6 @@
 <div class="modal-footer">
     <div class="col-sm-offset-3 col-sm-9">
         <input type="button" class="btn btn-primary" value="Save" ng-click="submitForm()" />
-        <input type="button" class="btn btn-primary" value="Cancle" ng-click="cancleForm()" />
+        <input type="button" class="btn btn-primary" value="Cancel" ng-click="cancelForm()" />
     </div>
 </div>

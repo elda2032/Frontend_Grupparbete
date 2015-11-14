@@ -17,7 +17,7 @@ namespace Frontend_Grupparbete.Controllers
 
             // Temporary Login ===============//
             var user = Database.Users.First();//
-            Session["user"] = user.Id;        //
+            Session["user"] = user;        //
             // ===============================//
 
             return View();
@@ -37,16 +37,7 @@ namespace Frontend_Grupparbete.Controllers
 
         public PartialViewResult LoginPartial()
         {
-            int id;
-
-            if (Session["user"] == null)
-            {
-                return this.PartialView("_login", null);
-            }
-
-            int.TryParse(Session["user"].ToString(), out id);
-            var user = Database.Users.FirstOrDefault(u => u.Id == id);
-            return PartialView("_login", user );
+            return PartialView("_login");
         }
 
         public JsonResult GetUser(int id)
@@ -97,13 +88,53 @@ namespace Frontend_Grupparbete.Controllers
                 throw new Exception("Wrong Password");
             }
 
-            Session["user"] = user.Email;
+            Session["user"] = user;
         }
 
         public ActionResult Logout()
         {
             Session["user"] = null;
-            return RedirectToAction("Index", "Home");
+            return Json(new {success = true, message = "User is logged out"}, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Login(string Email, string Password)
+        {
+            object result;
+            try
+            {
+                LoginUser(Email, Password);
+                var loggedInUser = Session["user"] as User;
+                result = new { success = true, message = "User is logged in", id = loggedInUser.Id };
+            }
+            catch (Exception e)
+            {
+                result = new { success = false, message = e.Message };
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        
+        public ActionResult TryGetLoggedInUser()
+        {
+            User user;
+            object result;
+            if (Session["user"] == null || (user = Session["user"] as User) == null)
+            {
+                result = new { success = false, message = "Sorry, you're not logged in!" };
+            }
+            else
+            {
+                result = new { success = true, email = user.Email, id = user.Id };
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
     }
+
+    public class Login
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
 }

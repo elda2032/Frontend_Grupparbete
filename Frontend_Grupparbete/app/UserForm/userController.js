@@ -35,14 +35,14 @@
             dataService.addOrUpdateUser($scope.editableUser).then(
                 function (results) {
                     $scope.user = angular.copy($scope.editableUser);
-                    $scope.SucessMessage = results.statusText;
+                    $scope.SuccessMessage = results.statusText;
                 },
                 function (results) {
                     $scope.ErrorMessage = results.statusText;
                 });
         }
 
-        $scope.cancleForm = function () {
+        $scope.cancelForm = function () {
             $modalInstance.dismiss();
         }
     }]);

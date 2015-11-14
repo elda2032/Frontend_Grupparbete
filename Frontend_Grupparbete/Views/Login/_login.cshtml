@@ -1,17 +1,28 @@
-﻿@model Frontend_Grupparbete.Models.User
-
+﻿@using Frontend_Grupparbete.Models
 
 <ul class="nav navbar-nav navbar-right" ng-controller="homeController">
 
-    @if (Model == null)
-    {
-        <li><a href="#" ng-click="showCreateUserForm()">Register</a></li>
-        <li>@Html.ActionLink("Login", "Index", "Login")</li>
-    }
-    else
-    {
-        <li><a href="#" ng-click="showUpdateUserForm(@Model.Id)">@Model.Email</a></li>
-        <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
-    }
+    @*@{
+            var user = Session["user"] as User;
+        }
+        @if (Session["user"] == null || user == null)
+        {
+            <li><a href="#" ng-click="showCreateUserForm()">Register</a></li>
+            <li><a href="#" ng-click="showLoginForm()">Login</a></li>
+        }
+        else
+        {
+            <li><a href="#" ng-click="showUpdateUserForm(@user.Id)">@user.Email</a></li>
+            <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+
+        }*@
+
+    <li ng-show="$root.login.notloggedin"><a href="#" ng-click="showCreateUserForm()">Register</a></li>
+    <li ng-show="$root.login.notloggedin"><a href="#" ng-click="showLoginForm()">Login</a></li>
+
+    <li ng-show="$root.login.loggedin"><a href="#" ng-click="showUpdateUserForm($root.login.loggedInUser.id)">{{ $root.login.loggedInUser.email }}</a></li>
+    <li ng-show="$root.login.loggedin"><a href="#" ng-click="logoutUser()">Logout</a></li>
+
+
 
 </ul>
