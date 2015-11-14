@@ -1,5 +1,66 @@
 ﻿@{
     ViewBag.Title = "Front End Home!";
 }
+<style>
+    .slidePictures {
+        /* Defensive */
+        max-width: 600px !important;
+    }
+    #myCarousel {
+        max-width: 600px !important;
+        margin: 0 auto;
+    }
+    #welcomeText {
+        text-align: center;
+    }
+</style>
+<h2 id="welcomeText">Welcome to our awesome site!</h2>
 
-<h2>Welcome to our awesome site!</h2>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <img alt="First slide" class="slidePictures" src="https://upload.wikimedia.org/wikipedia/commons/6/60/Single_Color_Flag_-_0087DC.png">
+            <div class="carousel-caption">
+                <h3>Mix it up!</h3>
+                <p>Displaying data in what ever way you want!</p>
+                <a href="@Url.Action("Index", "MixItUp")" class="btn btn-info" role="button">Mix it</a>
+            </div>
+        </div>
+        <div class="item">
+            <img alt="Second slide" class="slidePictures" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Single_Color_Flag_-_E65C01.svg/600px-Single_Color_Flag_-_E65C01.svg.png">
+            <div class="carousel-caption">
+                <h3>Datatables!</h3>
+                <p>Want your data in a table? We got that too!</p>
+                <a href="@Url.Action("Index", "DataTable")" class="btn btn-info" role="button">Datatables</a>
+            </div>
+        </div>
+        <div class="item">
+            <img alt="Third slide" class="slidePictures" src="http://fashionzona.com/wp-content/uploads/2012/12/green.jpg">
+            <div class="carousel-caption">
+                <h3>Weather!</h3>
+                <p>Get the weather for your location here!</p>
+                <a href="@Url.Action("Index", "Weather")" class="btn btn-info" role="button">Weather</a>
+            </div>
+        </div>
+        <div class="item">
+            <img alt="Fourth slide" class="slidePictures" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Single_Color_Flag_-_BF0000.svg"/>
+            <div class="carousel-caption">
+                <h3>Clock!</h3>
+                <p>Take your time, right here!</p>
+                <a href="@Url.Action("Index", "Clock")" class="btn btn-info" role="button">Clock</a>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
