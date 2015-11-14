@@ -25,13 +25,22 @@ namespace Frontend_Grupparbete.Controllers
         }
 
         [HttpPost]
-        public void RemoveUser(string userEmail)
+        public ActionResult RemoveUser(int id)
         {
-            var user = Database.Users.FirstOrDefault(u => u.Email == userEmail);
+            object result;
+            var user = Database.Users.FirstOrDefault(u => u.Id == id);
             if (user != null)
             {
                 Database.Users.Remove(user);
+                Database.SaveChanges();
+                result = new { success = true, message = string.Format("User: {0} has been deleted", id) };
             }
+            else
+            {
+                result = new { success = false, message = string.Format("Could not delete user: {0}", id) };
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
 
         [HttpPost]
@@ -45,7 +54,7 @@ namespace Frontend_Grupparbete.Controllers
             Database.Users.AddOrUpdate(user);
             Database.SaveChanges();
 
-            return new HttpStatusCodeResult(201, "User updated");
+            return Json(new {success = true, user = user, message = "User updated"}, JsonRequestBehavior.AllowGet);
         }
 
         public void LoginUser(string userEmail, string password)

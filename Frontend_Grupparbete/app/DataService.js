@@ -15,12 +15,17 @@
     var logout = function() {
         return $http.get("/Login/Logout");
     }
+    var deleteUser = function (id) {
+        console.log(id);
+        return $http.post("/Login/RemoveUser/" + id);
+    }
 
     return {
         getUser: getUser,
         addOrUpdateUser: addOrUpdateUser,
         loginUser: loginUser,
         tryGetLoggedInUser: tryGetLoggedInUser,
-        logout: logout
+        logout: logout,
+        deleteUser: deleteUser
     };
 }])
