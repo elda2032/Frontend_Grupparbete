@@ -12,34 +12,6 @@ namespace Frontend_Grupparbete.Controllers
 
     public class LoginController : DatabaseController
     {
-        public ActionResult Index()
-        {
-
-            // Temporary Login ===============//
-            var user = Database.Users.First();//
-            Session["user"] = user;        //
-            // ===============================//
-
-            return View();
-
-        }
-
-        public ActionResult Register()
-        {
-            return this.View();
-        }
-
-        public ActionResult Manage(int id)
-        {
-            var user = this.Database.Users.FirstOrDefault(u => u.Id == id);
-            return this.View(user);
-        }
-
-        public PartialViewResult LoginPartial()
-        {
-            return PartialView("_login");
-        }
-
         public JsonResult GetUser(int id)
         {
             var user  = this.Json(Database.Users.FirstOrDefault(u => u.Id == id), JsonRequestBehavior.AllowGet);
@@ -105,6 +77,10 @@ namespace Frontend_Grupparbete.Controllers
             {
                 LoginUser(Email, Password);
                 var loggedInUser = Session["user"] as User;
+                if (loggedInUser == null)
+                {
+                    throw new Exception("Could not login user");
+                }
                 result = new { success = true, message = "User is logged in", id = loggedInUser.Id };
             }
             catch (Exception e)
@@ -128,13 +104,5 @@ namespace Frontend_Grupparbete.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
     }
-
-    public class Login
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
-    }
-
 }
