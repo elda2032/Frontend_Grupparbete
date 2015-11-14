@@ -1,5 +1,8 @@
-﻿userFormApp.controller('userController', ["$scope", "dataService", "$modalInstance", "id",
-    function ($scope, dataService, $modalInstance, id) {
+﻿userFormApp.controller('userController', ["$scope", "dataService", "$modalInstance", "id","$controller",
+    function ($scope, dataService, $modalInstance, id, $controller) {
+
+        var homeController = $scope.$new();
+        $controller('homeController', { $scope: homeController });
 
         if (id === 0) {
             $scope.user = { Id: 0 };
@@ -58,6 +61,7 @@
                         $scope.editableUser = angular.copy($scope.user);
                         $scope.headline = "Create new User";
                         $scope.SuccessMessage = results.data.message;
+                        homeController.updateLoginMenu();
                     } else {
                         $scope.ErrorMessage = results.data.message;
                     }

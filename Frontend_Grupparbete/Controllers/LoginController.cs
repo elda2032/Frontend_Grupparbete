@@ -33,6 +33,11 @@ namespace Frontend_Grupparbete.Controllers
             {
                 Database.Users.Remove(user);
                 Database.SaveChanges();
+                var loggedInUser = Session["user"] as User;
+                if (loggedInUser != null && loggedInUser.Id == user.Id)
+                {
+                    Session["user"] = null;
+                }
                 result = new { success = true, message = string.Format("User: {0} has been deleted", id) };
             }
             else
