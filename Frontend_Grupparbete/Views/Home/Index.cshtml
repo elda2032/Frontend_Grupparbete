@@ -1,18 +1,49 @@
 ﻿@{
     ViewBag.Title = "Front End Home!";
+    ViewBag.Icon = "home";
 }
 <style>
     .slidePictures {
         /* Defensive */
-        max-width: 600px !important;
+        height: 400px !important;
+        max-height: 500px !important;
+        background-repeat: no-repeat;
+        background-position: center;
+        -ms-background-size: cover;
+        background-size: cover;
     }
+
     #myCarousel {
         max-width: 600px !important;
         margin: 0 auto;
     }
+
     #welcomeText {
         text-align: center;
     }
+
+    .carousel-caption {
+        background-color: #adadad;
+        background-color: rgba(173, 173, 173, 0.5);
+        padding-bottom: 50px;
+    }
+
+    .carousel-caption p,
+    .carousel-caption h3 {
+        -ms-text-shadow: 3px 3px 3px #000000;
+        text-shadow: 3px 3px 3px #000000;
+    }
+
+    .carousel-caption:hover {
+        color: white;
+    }
+
+    .carousel-inner {
+        -webkit-box-shadow: 10px 10px 5px #888888;
+        -ms-box-shadow: 10px 10px 5px #888888;
+        box-shadow: 10px 10px 5px #888888;
+    }
+
 </style>
 <h2 id="welcomeText">Welcome to our awesome site!</h2>
 
@@ -25,36 +56,32 @@
     </ol>
     <div class="carousel-inner">
         <div class="item active">
-            <img alt="First slide" class="slidePictures" src="https://upload.wikimedia.org/wikipedia/commons/6/60/Single_Color_Flag_-_0087DC.png">
-            <div class="carousel-caption">
+            <div alt="First slide" class="slidePictures" style="background-image: url(../../Content/StartPageImages/arrayRandom_1.png)"></div>
+            <a class="carousel-caption" href="@Url.Action("Index", "MixItUp")">
                 <h3>Mix it up!</h3>
                 <p>Displaying data in what ever way you want!</p>
-                <a href="@Url.Action("Index", "MixItUp")" class="btn btn-info" role="button">Mix it</a>
-            </div>
+            </a>
         </div>
         <div class="item">
-            <img alt="Second slide" class="slidePictures" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Single_Color_Flag_-_E65C01.svg/600px-Single_Color_Flag_-_E65C01.svg.png">
-            <div class="carousel-caption">
+            <div alt="Second slide" class="slidePictures" style="background-image: url(../../Content/StartPageImages/Data.jpg)"></div>
+            <a class="carousel-caption" href="@Url.Action("Index", "DataTable")">
                 <h3>Datatables!</h3>
                 <p>Want your data in a table? We got that too!</p>
-                <a href="@Url.Action("Index", "DataTable")" class="btn btn-info" role="button">Datatables</a>
-            </div>
+            </a>
         </div>
         <div class="item">
-            <img alt="Third slide" class="slidePictures" src="http://fashionzona.com/wp-content/uploads/2012/12/green.jpg">
-            <div class="carousel-caption">
+            <div alt="Third slide" class="slidePictures" style="background-image: url(../../Content/StartPageImages/WEATHER.jpg)"></div>
+            <a class="carousel-caption" href="@Url.Action("Index", "Weather")">
                 <h3>Weather!</h3>
                 <p>Get the weather for your location here!</p>
-                <a href="@Url.Action("Index", "Weather")" class="btn btn-info" role="button">Weather</a>
-            </div>
+            </a>
         </div>
         <div class="item">
-            <img alt="Fourth slide" class="slidePictures" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Single_Color_Flag_-_BF0000.svg"/>
-            <div class="carousel-caption">
+            <div alt="Fourth slide" class="slidePictures" style="background-image: url(../../Content/StartPageImages/21-tiptoe-clock-photography.jpg)"></div>
+            <a class="carousel-caption" href="@Url.Action("Index", "Clock")">
                 <h3>Clock!</h3>
                 <p>Take your time, right here!</p>
-                <a href="@Url.Action("Index", "Clock")" class="btn btn-info" role="button">Clock</a>
-            </div>
+            </a>
         </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
