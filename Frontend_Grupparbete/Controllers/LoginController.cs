@@ -53,7 +53,7 @@ namespace Frontend_Grupparbete.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(400,"ModelState not Valid");
+                return new HttpStatusCodeResult(400, "Please fill in all required fields");
             }
 
             Database.Users.AddOrUpdate(user);

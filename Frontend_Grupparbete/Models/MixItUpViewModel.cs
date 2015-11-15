@@ -25,7 +25,7 @@ namespace Frontend_Grupparbete.Models
                     found = true;
                 }
 
-                if (!found) Professions.Add(new SelectListItem() { Text = user.Profession, Value = user.Profession.Split(' ')[0] });
+                if (!found && !string.IsNullOrEmpty(user.Profession)) Professions.Add(new SelectListItem() { Text = user.Profession, Value = user.Profession.Split(' ')[0] });
             }
 
         }
