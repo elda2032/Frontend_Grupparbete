@@ -11,6 +11,7 @@ namespace Frontend_Grupparbete.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Nav = "Weather";
             return View();
         }
 

@@ -75,8 +75,6 @@
 
 </div>
 
-
-
 <script src="~/Scripts/jquery.mixitup.js"></script>
 <script>
     $(function () {
@@ -89,9 +87,6 @@
         });
     });
 
-    function manage(id) {
-        window.location.href = "@(Url.Action("Manage","Login"))?id=" + id;
-    }
     function setDirection(dir) {
         $('.btn').removeClass("active");
         $('#'+dir).addClass('active');

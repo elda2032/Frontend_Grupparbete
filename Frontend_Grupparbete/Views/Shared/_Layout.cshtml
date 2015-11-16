@@ -42,16 +42,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="@Url.Action("Index", "Home")" class="navbar-brand"><span class="fa fa-home"></span> Frontend Home</a>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")"><span class="fa fa-home"></span> Frontend Home</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Index", "MixItUp")"><span class="fa fa-random"></span> MixItUp</a></li>
-                    <li><a href="@Url.Action("Index", "DataTable")"><span class="fa fa-table"></span> DataTable</a></li>
-                    <li><a href="@Url.Action("Index", "Weather")"><span class="wi wi-day-sunny-overcast"></span> Weather</a></li>
-                    <li><a href="@Url.Action("Index", "Clock")"><span class="fa fa-clock-o"></span> Clock</a></li>
+                    <li class="@(ViewBag.Nav == "Mix" ? "active" : "")"><a  href="@Url.Action("Index", "MixItUp")"><span class="fa fa-random "></span> MixItUp</a></li>
+                    <li class="@(ViewBag.Nav == "Table" ? "active" : "")"><a href="@Url.Action("Index", "DataTable")"><span class="fa fa-table" ></span> DataTable</a></li>
+                    <li class="@(ViewBag.Nav == "Weather"? "active" : "")"><a href="@Url.Action("Index", "Weather")"><span class="wi wi-day-sunny-overcast"></span> Weather</a></li>
+                    <li class="@(ViewBag.Nav == "Clock" ? "active" : "")"><a href="@Url.Action("Index", "Clock")"><span class="fa fa-clock-o"></span> Clock</a></li>
                 </ul>
 
                 <div ng-controller="homeController">

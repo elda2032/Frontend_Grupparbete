@@ -13,6 +13,7 @@ namespace Frontend_Grupparbete.Controllers
         // GET: DataTable get.rekt();
         public ActionResult Index()
         {
+            ViewBag.Nav = "Table";
             return View(Database.Users);
         }
     }

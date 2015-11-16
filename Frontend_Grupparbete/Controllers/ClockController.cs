@@ -10,6 +10,7 @@ namespace Frontend_Grupparbete.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Nav = "Clock";
             return View();
     
         }

@@ -13,6 +13,7 @@ namespace Frontend_Grupparbete.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Nav = "Mix";
             return View(new MixItUpViewModel(Database.Users));
         }
     }
