@@ -11,6 +11,7 @@
 	Responsivitet hanteras med hjälp av bootstrap och media-queries.
 	Weathericons font för symbolerna. 
 
+
 	• Klocka: Lena.
 	På klocksidan har jag använt mig av flera olika plugin för olika funktioner. 
 CoolClock http://randomibis.com/coolclock/coolclock.js tillsammans med moreskins http://randomibis.com/coolclock/moreskins.js för de analoga klockorna. 
