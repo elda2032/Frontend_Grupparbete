@@ -51,7 +51,7 @@
 <div class="modal-footer">
     <div class="col-sm-offset-3 col-sm-9">
         <input ng-show="editableUser.Id" type="button" class="btn btn-primary" value="Delete" ng-click="deleteUser(editableUser.Id)"/>
-        <input ng-show="editableUser.Id" type="button" class="btn btn-primary" value="Login" ng-click="loginUser(editableUser.Email, editableUser.Password)"/>
+        <input ng-show="editableUser.Id && $root.login.notloggedin" type="button" class="btn btn-primary" value="Login" ng-click="loginUser(editableUser.Email, editableUser.Password)"/>
         <input type="button" class="btn btn-primary" value="Save" ng-click="submitForm()" ng-disabled="userForm.$invalid"/>
         <input type="button" class="btn btn-primary" value="Cancel" ng-click="cancelForm()"/>
     </div>
