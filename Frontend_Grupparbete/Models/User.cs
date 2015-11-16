@@ -10,7 +10,7 @@ namespace Frontend_Grupparbete.Models
     public class User
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "FIrst Name required")]
+        [Required(ErrorMessage = "First Name required")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Last Name required")]

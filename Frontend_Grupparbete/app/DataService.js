@@ -6,7 +6,7 @@
     var addOrUpdateUser = function (user) {
         return $http.post("/Login/UpdateUser", user);
     }
-    var loginUser = function(user) {
+    var loginUser = function (user) {
         return $http.post("/Login/Login", user);
     }
     var tryGetLoggedInUser = function() {

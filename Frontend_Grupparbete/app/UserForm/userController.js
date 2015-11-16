@@ -67,4 +67,16 @@
                     }
                 });
         }
+
+        $scope.loginUser = function (email, password) {
+            dataService.loginUser({ Email: email, Password : password }).then(
+                function (results) {
+                    if (results.data.success) {
+                        $scope.SuccessMessage = results.data.message;
+                        homeController.updateLoginMenu();
+                    } else {
+                        $scope.ErrorMessage = results.data.message;
+                    }
+                });
+        }
     }]);
