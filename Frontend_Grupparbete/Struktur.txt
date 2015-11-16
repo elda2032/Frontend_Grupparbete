@@ -31,6 +31,9 @@ Väder sökningar lagras i en timme i localstorage, baserat på longitude och la
 	https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.css
 	https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.js
 	I viewen används Razor för modelbinding och populeras med hjälp av en foreach loop. 
+	Datatable appliceras via jQuery till html skapad av modelbindningen. Datatablen får sin design från bootstraps css klasser och är responsiv.
+	Datatablen visar kolumner efter skärmstorlek och visa t.ex. i en enda kolumn vid minsta skärmbredd. Då kan man klicka på respektive
+	cell för att få fram informationen från andra kolumner.
 
 
 
