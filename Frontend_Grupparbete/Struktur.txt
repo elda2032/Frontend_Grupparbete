@@ -14,20 +14,26 @@
 
 	• Klocka: Lena.
 	På klocksidan har jag använt mig av flera olika plugin för olika funktioner. 
-CoolClock http://randomibis.com/coolclock/coolclock.js tillsammans med moreskins http://randomibis.com/coolclock/moreskins.js för de analoga klockorna. 
-Moment http://momentjs.com/ för uträkning av tiden just nu och antal dagar kvar detta år. 
-Runner   https://plugins.jquery.com/runner/   för tidtagaren, där har jag använt tre metoder runnerStart, runnerStop och runnerReset. 
+	CoolClock http://randomibis.com/coolclock/coolclock.js tillsammans med moreskins http://randomibis.com/coolclock/moreskins.js för de analoga klockorna. 
+	Moment http://momentjs.com/ för uträkning av tiden just nu och antal dagar kvar detta år. 
+	Runner   https://plugins.jquery.com/runner/   för tidtagaren, där har jag använt tre metoder runnerStart, runnerStop och runnerReset. 
 
 	• DataTable : Fredrik.
 	Hämtar users ur databasen 
-https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.css
-https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.js
-I viewen används Razor för modelbinding och populeras med hjälp av en foreach loop. 
+	https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.css
+	https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.js
+	I viewen används Razor för modelbinding och populeras med hjälp av en foreach loop. 
 
 
 
 	• MixitUp : Stefan.
+	Här har jag använt en plugin som heter MixItUp för att kunna sortera våran databas med användare på ett snyggt och enkelt sätt. Har använt mig av MVC och razor för att binda modelen (användarna) till vyn.
+	Jag använde mig av modal klassen för att skapa små fina flytande containers för alla användare i databasen. 
+	Sen har jag lagt till funktion för att kunna filtrera och sortera på olika värden. 
+	Vid klick på en användare så popar det upp en Edit modal som är skriven i Angular. 
+	https://mixitup.kunkalabs.com/ 
 
-	Razor i view för modelbinding
-https://mixitup.kunkalabs.com/  plugin 
 
+	• AnvändarRegistrering/Editering och Login : Stefan + Elin.
+	Vi valde att jobba på varsin del av denna funktionalitet. Stefan gjorde Registrering och Editerings delen och Elin gjorde Login. 
+	Vi valde att använda os av AngularJs samt Ui-Bootstrap för att pressentera dessa i Modal popups. Samt MVC och EntityFramework/SQL för att hantera allt på serversidan.
