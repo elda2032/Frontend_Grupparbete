@@ -6,6 +6,27 @@
 	• En Layoutsida med toppmeny.
 	• En inlogningssida i Angular.
 	• Väder : Elin.
+	Vädret är uppdelat i fyra delar, vädret just nu, vädret dag för dag i en vecka framåt, vädret timme för timme i två dygn framåt, och en graf som visar temperatur och nederbörd två dygn framåt. För att hämta väder-information så använder jag mig av API:et  https://api.forecast.io/forecast/. 
+	Jag använder sedan ajax, och mvc för att rendera partial-views för de olika väder-vyerna, utifrån den json-data man får från API:et. I vyerna använder jag mig av weather-icons (https://erikflowers.github.io/weather-icons/ ) och bootstrap-tooltips för att 
+	Responsivitet hanteras med hjälp av bootstrap och media-queries.
+	Weathericons font för symbolerna. 
+
 	• Klocka: Lena.
+	På klocksidan har jag använt mig av flera olika plugin för olika funktioner. 
+CoolClock http://randomibis.com/coolclock/coolclock.js tillsammans med moreskins http://randomibis.com/coolclock/moreskins.js för de analoga klockorna. 
+Moment http://momentjs.com/ för uträkning av tiden just nu och antal dagar kvar detta år. 
+Runner   https://plugins.jquery.com/runner/   för tidtagaren, där har jag använt tre metoder runnerStart, runnerStop och runnerReset. 
+
 	• DataTable : Fredrik.
+	Hämtar users ur databasen 
+https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.css
+https://cdn.datatables.net/r/dt/jq-2.1.4,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,r-1.0.7,se-1.0.1/datatables.min.js
+I viewen används Razor för modelbinding och populeras med hjälp av en foreach loop. 
+
+
+
 	• MixitUp : Stefan.
+
+	Razor i view för modelbinding
+https://mixitup.kunkalabs.com/  plugin 
+
