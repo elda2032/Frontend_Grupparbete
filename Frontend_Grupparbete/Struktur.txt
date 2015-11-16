@@ -17,6 +17,7 @@ Responsivitet hanteras med hjälp av bootstrap och media-queries.
 Grafen är gjorde med hjälp av http://www.flotcharts.org/ plugin.
 Jag använder HTML5 geolocation API för att hämta användarens plats när man först går in på väder-sidan.
 För att söka på en plats så används google maps API.
+Väder sökningar lagras i en timme i localstorage, baserat på longitude och latitude, detta för att minska belastningen på väder API:et.
 
 
 	• Klocka: Lena.
