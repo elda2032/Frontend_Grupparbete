@@ -5,11 +5,18 @@
 	• En Controller för varje sida.
 	• En Layoutsida med toppmeny.
 	• En inlogningssida i Angular.
+	
 	• Väder : Elin.
-	Vädret är uppdelat i fyra delar, vädret just nu, vädret dag för dag i en vecka framåt, vädret timme för timme i två dygn framåt, och en graf som visar temperatur och nederbörd två dygn framåt. För att hämta väder-information så använder jag mig av API:et  https://api.forecast.io/forecast/. 
-	Jag använder sedan ajax, och mvc för att rendera partial-views för de olika väder-vyerna, utifrån den json-data man får från API:et. I vyerna använder jag mig av weather-icons (https://erikflowers.github.io/weather-icons/ ) och bootstrap-tooltips för att 
-	Responsivitet hanteras med hjälp av bootstrap och media-queries.
-	Weathericons font för symbolerna. 
+	Vädret är uppdelat i fyra delar, vädret just nu, vädret dag för dag i en vecka framåt, 
+vädret timme för timme i två dygn framåt, och en graf som visar temperatur och nederbörd två dygn framåt. 
+För att hämta väder-information så använder jag mig av API:et  https://api.forecast.io/forecast/. 
+Jag använder sedan ajax, och mvc för att rendera partial-views för de olika väder-vyerna, 
+utifrån den json-data man får från API:et. 
+I vyerna använder jag mig av weather-icons font (https://erikflowers.github.io/weather-icons/ ) och bootstrap-tooltips.
+Responsivitet hanteras med hjälp av bootstrap och media-queries.
+Grafen är gjorde med hjälp av http://www.flotcharts.org/ plugin.
+Jag använder HTML5 geolocation API för att hämta användarens plats när man först går in på väder-sidan.
+För att söka på en plats så används google maps API.
 
 
 	• Klocka: Lena.
