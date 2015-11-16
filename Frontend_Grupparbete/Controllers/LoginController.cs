@@ -12,43 +12,6 @@ namespace Frontend_Grupparbete.Controllers
 
     public class LoginController : DatabaseController
     {
-        public ActionResult Index()
-        {
-
-            // Temporary Login ===============//
-            var user = Database.Users.First();//
-            Session["user"] = user.Id;        //
-            // ===============================//
-
-            return View();
-
-        }
-
-        public ActionResult Register()
-        {
-            return this.View();
-        }
-
-        public ActionResult Manage(int id)
-        {
-            var user = this.Database.Users.FirstOrDefault(u => u.Id == id);
-            return this.View(user);
-        }
-
-        public PartialViewResult LoginPartial()
-        {
-            int id;
-
-            if (Session["user"] == null)
-            {
-                return this.PartialView("_login", null);
-            }
-
-            int.TryParse(Session["user"].ToString(), out id);
-            var user = Database.Users.FirstOrDefault(u => u.Id == id);
-            return PartialView("_login", user );
-        }
-
         public JsonResult GetUser(int id)
         {
             var user  = this.Json(Database.Users.FirstOrDefault(u => u.Id == id), JsonRequestBehavior.AllowGet);
@@ -62,13 +25,27 @@ namespace Frontend_Grupparbete.Controllers
         }
 
         [HttpPost]
-        public void RemoveUser(string userEmail)
+        public ActionResult RemoveUser(int id)
         {
-            var user = Database.Users.FirstOrDefault(u => u.Email == userEmail);
+            object result;
+            var user = Database.Users.FirstOrDefault(u => u.Id == id);
             if (user != null)
             {
                 Database.Users.Remove(user);
+                Database.SaveChanges();
+                var loggedInUser = Session["user"] as User;
+                if (loggedInUser != null && loggedInUser.Id == user.Id)
+                {
+                    Session["user"] = null;
+                }
+                result = new { success = true, message = string.Format("User: {0} has been deleted", id) };
             }
+            else
+            {
+                result = new { success = false, message = string.Format("Could not delete user: {0}", id) };
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
 
         [HttpPost]
@@ -76,13 +53,13 @@ namespace Frontend_Grupparbete.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(400,"ModelState not Valid");
+                return new HttpStatusCodeResult(400, "Please fill in all required fields");
             }
 
             Database.Users.AddOrUpdate(user);
             Database.SaveChanges();
 
-            return new HttpStatusCodeResult(201, "User updated");
+            return Json(new {success = true, user = user, message = "User updated"}, JsonRequestBehavior.AllowGet);
         }
 
         public void LoginUser(string userEmail, string password)
@@ -97,13 +74,49 @@ namespace Frontend_Grupparbete.Controllers
                 throw new Exception("Wrong Password");
             }
 
-            Session["user"] = user.Email;
+            Session["user"] = user;
         }
 
         public ActionResult Logout()
         {
             Session["user"] = null;
-            return RedirectToAction("Index", "Home");
+            return Json(new {success = true, message = "User is logged out"}, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Login(string Email, string Password)
+        {
+            object result;
+            try
+            {
+                LoginUser(Email, Password);
+                var loggedInUser = Session["user"] as User;
+                if (loggedInUser == null)
+                {
+                    throw new Exception("Could not login user");
+                }
+                result = new { success = true, message = "User is logged in", id = loggedInUser.Id };
+            }
+            catch (Exception e)
+            {
+                result = new { success = false, message = e.Message };
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        
+        public ActionResult TryGetLoggedInUser()
+        {
+            User user;
+            object result;
+            if (Session["user"] == null || (user = Session["user"] as User) == null)
+            {
+                result = new { success = false, message = "Sorry, you're not logged in!" };
+            }
+            else
+            {
+                result = new { success = true, email = user.Email, id = user.Id };
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

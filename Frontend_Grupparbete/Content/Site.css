@@ -1,13 +1,15 @@
 ﻿body {
     padding-bottom: 20px;
-    background: #f6f6fa;;
+    background: #f6f6fa;
 }
+
 .innerbody {
     background: white;
     height: 100%;
     min-height: 2000px;
     margin-top: 0;
 }
+
 .navbar {
     margin-bottom: 0;
 }
@@ -31,6 +33,7 @@ textarea {
 .itemContainer {
     padding: 0;
 }
+
 .mix {
     padding: 2px;
     width: 100%;
@@ -38,10 +41,11 @@ textarea {
     background: #f6f6fa;
     margin-bottom: 8px;
 }
-.mix:hover {
-    cursor: pointer;
-    background: white;
-}
+
+    .mix:hover {
+        cursor: pointer;
+        background: white;
+    }
 
 .sort {
     margin: 5px 0 5px 0;
@@ -54,6 +58,7 @@ select {
 #buttons.btn {
     margin: 2px;
 }
+
 #buttons.btn-toggle {
     margin: 2px;
 }
@@ -63,6 +68,7 @@ select {
     width: 60px;
     border-radius: 5px;
 }
+
 .iconContainer {
     margin: 2px;
     float: left;
@@ -70,7 +76,20 @@ select {
     height: 60px;
     display: inline-block;
 }
+
 .userInfoContainer {
     height: 60px;
     display: inline-block;
+}
+
+/* FIX TO KEEP BODY FROM MOVING WHEN OPENING MODAL */
+body.modal-open {
+    overflow: inherit;
+    padding-right: inherit !important;
+}
+
+/* FIX FOR MORE RESPONSIVE MODAL */
+.modal-body .form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
 }

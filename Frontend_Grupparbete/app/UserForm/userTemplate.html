@@ -6,42 +6,42 @@
 
 <div class="modal-body">
     <div ng-show="ErrorMessage" class="alert alert-warning"> {{ ErrorMessage }} </div>
-    <div ng-show="SucessMessage" class="alert alert-success"> {{ SucessMessage}} </div>
-    <form class="form-horizontal" role="form">
+    <div ng-show="SuccessMessage" class="alert alert-success"> {{ SuccessMessage}} </div>
+    <form class="form-horizontal" role="form" name="userForm" novalidate>
         <fieldset>
             <legend>Basic information</legend>
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.FirstName.$invalid && userForm.FirstName.$dirty}">
                 <label for="firstName" class="control-label col-sm-3">First Name</label>
-                <input id="firstName" class="form-control col-sm-9" type="text" Name="FirstName" ng-model="editableUser.FirstName"/>
+                <input id="firstName" class="form-control col-sm-9" type="text" Name="FirstName" ng-model="editableUser.FirstName" required/>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.LastName.$invalid && userForm.LastName.$dirty}">
                 <label for="lastName" class="control-label col-sm-3">Last Name</label>
-                <input id="lastName" class="form-control" type="text" Name="LastName" ng-model="editableUser.LastName"/>
+                <input id="lastName" class="form-control" type="text" Name="LastName" ng-model="editableUser.LastName" required/>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.Email.$invalid && userForm.Email.$dirty}">
                 <label for="email" class="control-label col-sm-3">Email</label>
-                <input id="email" class="form-control" type="email" Name="email" ng-model="editableUser.Email"/>
+                <input id="email" class="form-control" type="email" Name="Email" ng-model="editableUser.Email" required/>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.Password.$invalid && userForm.Password.$dirty}">
                 <label for="password" class="control-label col-sm-3">Password</label>
-                <input id="password" class="form-control col-sm-9" type="password" Name="Password" ng-model="editableUser.Password"/>
+                <input id="password" class="form-control col-sm-9" type="password" Name="Password" ng-model="editableUser.Password" required/>
             </div>
 
         </fieldset>
         <fieldset>
             <legend>Profession Information</legend>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.Income.$invalid && userForm.Income.$dirty}">
                 <label for="income" class="control-label col-sm-3">Income</label>
-                <input id="income" class="form-control col-sm-9" type="number" Name="Income" ng-model="editableUser.Income"/>
+                <input id="income" class="form-control col-sm-9" type="number" Name="Income" ng-model="editableUser.Income" required/>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.Profession.$invalid && userForm.Profession.$dirty}">
                 <label for="profession" class="control-label col-sm-3">Profession</label>
-                <select id="profession" class="form-control col-sm-9" Name="Profession" ng-model="editableUser.Profession" ng-options="prof for prof in professions"></select>
+                <select id="profession" class="form-control col-sm-9" Name="Profession" ng-model="editableUser.Profession" ng-options="prof for prof in professions" required></select>
             </div>
 
         </fieldset>
@@ -50,7 +50,9 @@
 
 <div class="modal-footer">
     <div class="col-sm-offset-3 col-sm-9">
-        <input type="button" class="btn btn-primary" value="Save" ng-click="submitForm()" />
-        <input type="button" class="btn btn-primary" value="Cancle" ng-click="cancleForm()" />
+        <input ng-show="editableUser.Id" type="button" class="btn btn-primary" value="Delete" ng-click="deleteUser(editableUser.Id)"/>
+        <input ng-show="editableUser.Id && $root.login.notloggedin" type="button" class="btn btn-primary" value="Login" ng-click="loginUser(editableUser.Email, editableUser.Password)"/>
+        <input type="button" class="btn btn-primary" value="Save" ng-click="submitForm()" ng-disabled="userForm.$invalid"/>
+        <input type="button" class="btn btn-primary" value="Cancel" ng-click="cancelForm()"/>
     </div>
 </div>

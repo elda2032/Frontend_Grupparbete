@@ -1,5 +1,93 @@
 ﻿@{
     ViewBag.Title = "Front End Home!";
+    ViewBag.Icon = "home";
 }
+<style>
+    .slidePictures {
+        /* Defensive */
+        height: 400px !important;
+        max-height: 500px !important;
+        background-repeat: no-repeat;
+        background-position: center;
+        -ms-background-size: cover;
+        background-size: cover;
+    }
 
-<h2>Welcome to our awesome site!</h2>
+    #myCarousel {
+        max-width: 600px !important;
+        margin: 0 auto;
+    }
+
+    #welcomeText {
+        text-align: center;
+    }
+
+    .carousel-caption {
+        background-color: #adadad;
+        background-color: rgba(173, 173, 173, 0.5);
+        padding-bottom: 50px;
+    }
+
+    .carousel-caption p,
+    .carousel-caption h3 {
+        -ms-text-shadow: 3px 3px 3px #000000;
+        text-shadow: 3px 3px 3px #000000;
+    }
+
+    .carousel-caption:hover {
+        color: white;
+    }
+
+    .carousel-inner {
+        -webkit-box-shadow: 10px 10px 5px #888888;
+        -ms-box-shadow: 10px 10px 5px #888888;
+        box-shadow: 10px 10px 5px #888888;
+    }
+
+</style>
+<h2 id="welcomeText">Welcome to our awesome site!</h2>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <div alt="First slide" class="slidePictures" style="background-image: url(../../Content/StartPageImages/arrayRandom_1.png)"></div>
+            <a class="carousel-caption" href="@Url.Action("Index", "MixItUp")">
+                <h3>Mix it up!</h3>
+                <p>Displaying data in what ever way you want!</p>
+            </a>
+        </div>
+        <div class="item">
+            <div alt="Second slide" class="slidePictures" style="background-image: url(../../Content/StartPageImages/Data.jpg)"></div>
+            <a class="carousel-caption" href="@Url.Action("Index", "DataTable")">
+                <h3>Datatables!</h3>
+                <p>Want your data in a table? We got that too!</p>
+            </a>
+        </div>
+        <div class="item">
+            <div alt="Third slide" class="slidePictures" style="background-image: url(../../Content/StartPageImages/WEATHER.jpg)"></div>
+            <a class="carousel-caption" href="@Url.Action("Index", "Weather")">
+                <h3>Weather!</h3>
+                <p>Get the weather for your location here!</p>
+            </a>
+        </div>
+        <div class="item">
+            <div alt="Fourth slide" class="slidePictures" style="background-image: url(../../Content/StartPageImages/21-tiptoe-clock-photography.jpg)"></div>
+            <a class="carousel-caption" href="@Url.Action("Index", "Clock")">
+                <h3>Clock!</h3>
+                <p>Take your time, right here!</p>
+            </a>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>

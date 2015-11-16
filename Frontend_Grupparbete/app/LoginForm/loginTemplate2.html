@@ -1,0 +1,28 @@
+﻿
+
+<div class="modal-header">
+    <h3>Login</h3>
+</div>
+
+<div class="modal-body">
+    <div ng-show="ErrorMessage" class="alert alert-warning"> {{ ErrorMessage }} </div>
+    <div ng-show="SuccessMessage" class="alert alert-success"> {{ SuccessMessage }} </div>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="email" class="control-label col-sm-3">Email</label>
+            <input id="email" class="form-control" type="email" Name="Email" ng-model="user.Email" />
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="control-label col-sm-3">Password</label>
+            <input id="password" class="form-control col-sm-9" type="password" Name="Password" ng-model="user.Password" />
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <div class="col-sm-offset-3 col-sm-9">
+        <input type="button" class="btn btn-primary" value="Login" ng-click="submitForm()" />
+        <input type="button" class="btn btn-primary" value="Cancel" ng-click="cancelForm()" />
+    </div>
+</div>

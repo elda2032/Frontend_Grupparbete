@@ -1,0 +1,20 @@
+﻿
+<ul class="nav navbar-nav navbar-right">
+
+    <li ng-show="$root.login.notloggedin">
+        <a href="#" ng-click="showCreateUserForm()"><span class="fa fa-user-plus"></span> Register</a>
+    </li>
+    <li ng-show="$root.login.notloggedin">
+        <a href="#" ng-click="showLoginForm()"><span class="fa fa-sign-in"></span> Login</a>
+    </li>
+
+    <li ng-show="$root.login.loggedin">
+        <a href="#" ng-click="showUpdateUserForm($root.login.loggedInUser.id)">
+            <span class="fa fa-user"></span> 
+            {{ $root.login.loggedInUser.email }}
+        </a>
+    </li>
+    <li ng-show="$root.login.loggedin">
+        <a href="#" ng-click="logoutUser()"><span class="fa fa-sign-out"></span> Logout</a>
+    </li>
+</ul>
